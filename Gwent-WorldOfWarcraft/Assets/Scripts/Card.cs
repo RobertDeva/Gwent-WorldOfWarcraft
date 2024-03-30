@@ -65,8 +65,6 @@ namespace GwentEngine
         M,
         R,
         S,
-        A,
-        C
     }
 
     public enum UnitCardtipe

@@ -33,13 +33,13 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {    
         startParent = transform.parent;
         if(startParent == HandP1.transform || startParent == HandP2.transform)
-        transform.SetParent(transform.parent.parent, false);
+        transform.SetParent(transform.parent.parent.parent, false);
     }
     public void OnDrag(PointerEventData eventData)
     {
        
         this.transform.position = eventData.position;
-        transform.SetParent(transform.parent.parent, true);
+        transform.SetParent(transform.parent.parent.parent, true);
 
     }
     public void OnEndDrag(PointerEventData eventData)

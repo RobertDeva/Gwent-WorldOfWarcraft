@@ -28,6 +28,5 @@ public class Draw : MonoBehaviour
         
         GameObject card = Instantiate(Card, new Vector3(0,0,0), Quaternion.identity);
         card.transform.SetParent(Hand.transform,false);
-        Player.GetComponent<Player>().Hand.Add(card);
     }
 }

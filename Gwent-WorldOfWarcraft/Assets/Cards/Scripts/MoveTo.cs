@@ -66,7 +66,6 @@ public class MoveTo: MonoBehaviour
                 P1.GetComponent<Player>().Played = true;
             else
                 P2.GetComponent<Player>().Played = true;
-
         }
         else if(startParent == HandP1.transform)
         {
@@ -74,14 +73,12 @@ public class MoveTo: MonoBehaviour
             {
                 transform.SetParent(MeleeP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().MeleeZone.Add(GetComponent<GameObject>());
                 P1.GetComponent<Player>().Played = true;
             }
             else if (a == Card.CardTipe.Upgrade)
             {
                 transform.SetParent(MeleeUpP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().MeleeBuff.Add(GetComponent<GameObject>());
                 P1.GetComponent<Player>().Played = true;
             }        
             
@@ -92,14 +89,12 @@ public class MoveTo: MonoBehaviour
             {
                 transform.SetParent(MeleeP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P2.GetComponent<Player>().MeleeZone.Add(GetComponent<GameObject>());
                 P2.GetComponent<Player>().Played = true;
             }
             else if (a == Card.CardTipe.Upgrade)
             { 
                 transform.SetParent(MeleeUpP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P2.GetComponent<Player>().MeleeBuff.Add(GetComponent<GameObject>());
                 P2.GetComponent<Player>().Played = true;
             }
         }
@@ -126,14 +121,12 @@ public class MoveTo: MonoBehaviour
             {
                 transform.SetParent(RangeP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().RangeZone.Add(GetComponent<GameObject>());
                 P1.GetComponent<Player>().Played = true;
             }
             else if (a == Card.CardTipe.Upgrade)
             {
                 transform.SetParent(RangeUpP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().RangeBuff.Add(GetComponent<GameObject>());
                 P1.GetComponent<Player>().Played = true;
             }
         }
@@ -143,14 +136,12 @@ public class MoveTo: MonoBehaviour
             {
                 transform.SetParent(RangeP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P2.GetComponent<Player>().RangeZone.Add(GetComponent<GameObject>());
                 P2.GetComponent<Player>().Played = true;
             }
             else if (a == Card.CardTipe.Upgrade)
             {
                 transform.SetParent(RangeUpP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P2.GetComponent<Player>().RangeBuff.Add(GetComponent<GameObject>());
                 P2.GetComponent<Player>().Played = true;
             }
         }
@@ -177,14 +168,12 @@ public class MoveTo: MonoBehaviour
             {
                 transform.SetParent(SiegeP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().SiegeZone.Add(GetComponent<GameObject>());
                 P1.GetComponent<Player>().Played = true;
             }
             else if (a == Card.CardTipe.Upgrade)
             {
                 transform.SetParent(SiegeUpP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().SiegeBuff.Add(GetComponent<GameObject>());
                 P1.GetComponent<Player>().Played = true;
             }
         }
@@ -194,14 +183,12 @@ public class MoveTo: MonoBehaviour
             {
                 transform.SetParent(SiegeP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P2.GetComponent<Player>().SiegeZone.Add(GetComponent<GameObject>());
                 P2.GetComponent<Player>().Played = true;
             }
             else if (a == Card.CardTipe.Upgrade)
             {
                 transform.SetParent(SiegeUpP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P2.GetComponent<Player>().SiegeBuff.Add(GetComponent<GameObject>());
                 P2.GetComponent<Player>().Played = true;
             }
         }

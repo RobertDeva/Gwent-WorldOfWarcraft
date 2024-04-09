@@ -44,3 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a97b2bbf4c896043b760b0383f50054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Played: 0
+  Passed: 0
+  Drawed: 0
+  IsPlaying: 0
+  StartPlay: 0
+  MeleeZone: {fileID: 0}
+  RangeZone: {fileID: 0}
+  SiegeZone: {fileID: 0}
+  MeleeBuff: {fileID: 0}
+  RangeBuff: {fileID: 0}
+  SiegeBuff: {fileID: 0}
+  MLP: {fileID: 0}
+  RLP: {fileID: 0}
+  SLP: {fileID: 0}
+  TP: {fileID: 0}

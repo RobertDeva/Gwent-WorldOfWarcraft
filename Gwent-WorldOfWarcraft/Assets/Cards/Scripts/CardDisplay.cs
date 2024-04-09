@@ -7,6 +7,7 @@ using GwentEngine;
 
 public class CardDisplay : MonoBehaviour
 {
+    bool start = false;
     public Card card;
 
     public TMP_Text CardName;
@@ -27,34 +28,36 @@ public class CardDisplay : MonoBehaviour
     public string Description;
     
     // Start is called before the first frame update
-    void Start()
-    {   // Esto es lo que se muestra en la interfaz
-        CardName.text = card.CardName;
-        CardDescription.text = card.Description;
-        Attack.text = card.Attack.ToString();
-        Positions.text = card.Positions;
-        ArtWork.sprite = card.CardFront;
+    void Update()
+    {
+        if (start == true)
+        {
+            // Esto es lo que se muestra en la interfaz
+            CardName.text = card.CardName;
+            CardDescription.text = card.Description;
+            Attack.text = card.Attack.ToString();
+            Positions.text = card.Positions;
+            ArtWork.sprite = card.CardFront;
 
-        // Son las propiedades de la carta
-        Name = card.CardName;
-        AttackPower = card.Attack;
-        CardFaction = card.CardFaction;
-        Cardtipe = card.Cardtipe;
-        Position1 = card.Position1;
-        Position2 = card.Position2;
-        Position3 = card.Position3;
-        ID = card.ID;
-        CardRank = card.CardRank;
-        Description = card.Description;
+            // Son las propiedades de la carta
+            Name = card.CardName;
+            AttackPower = card.Attack;
+            CardFaction = card.CardFaction;
+            Cardtipe = card.Cardtipe;
+            Position1 = card.Position1;
+            Position2 = card.Position2;
+            Position3 = card.Position3;
+            ID = card.ID;
+            CardRank = card.CardRank;
+            Description = card.Description;
+        }
 
     }
-
     public bool InField = false;
     public bool Upgraded = false;
     public bool AffectedByWeather = false;
     public bool Buffed = false;
     public bool Debuffed = false;
     public bool BondInField = false;
-
 
 }

@@ -6,18 +6,23 @@ using GwentEngine;
 
 public class Player : MonoBehaviour
 {
+    public List<Card> cards;
+
+    
     public bool Played = false;
     public bool Passed = false;
     public bool Drawed = false;
     public bool IsPlaying = false;
     public bool StartPlay = false;
 
+    public Leader Leader;
     public GameObject MeleeZone;
     public GameObject RangeZone;
     public GameObject SiegeZone;
     public GameObject MeleeBuff;
     public GameObject RangeBuff;
     public GameObject SiegeBuff;
+    public Stack<Card> Deck;
 
     int MeleeLinePower = 0;
     int RangeLinePower = 0;
@@ -98,10 +103,42 @@ public class Player : MonoBehaviour
     {
         TotalPower = MeleeLinePower + RangeLinePower + SiegeLinePower;
     }
+    public int GetFinalPower()
+    {
+        int Power = TotalPower;
+        return Power;
+    }
 
-     void Update()
+    public void Pass()
+    {
+        if (IsPlaying == true)
+        {
+            if (Played == false)
+                Passed = true;
+            IsPlaying = false;
+        }
+    }
+    List<Card> Shuffle(List<Card> cards)
+    {
+        System.Random random = new();
+        List<Card> list = new();
+
+        while (cards.Count > 0)
+        {
+            int index = random.Next(0, cards.Count);
+            list.Add(cards[index]);
+            cards.RemoveAt(index);
+        }
+        return list;
+    }
+   
+
+    private void Start()
+    {
+    }
+    void Update()
      {
-        if(Played == true && Passed == false)
+        if(IsPlaying == false || Played == true && Passed == false)
         {
             GetLinePower(MeleeZone);
             GetLinePower(RangeZone);

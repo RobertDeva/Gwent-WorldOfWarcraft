@@ -31,7 +31,6 @@ namespace GwentEngine
         }
         public enum CardTipe
         {
-            Leader,
             Weather,
             ClearWeather,
             Lure,
@@ -61,7 +60,6 @@ namespace GwentEngine
             DestroyCard,
             CardUp,
             CardDown,
-            SaveCard,
             NoEffect
         }
     }

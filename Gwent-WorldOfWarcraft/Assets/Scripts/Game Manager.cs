@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    AudioSource GameTrack;
+    AudioSource EndRoundTrack;
+    AudioSource StartRoundTrack;
     bool Round1Playing = false;
     bool Round1End = false;
     bool Round2Playing = false;
@@ -54,8 +57,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Turns();
-        EndRound();
-        Invoke(nameof(Play), 3.0f);
+        Invoke(nameof(EndRound), 1.0f);
+        Invoke(nameof(Play), 4.0f);
     }
     //This method mark the begin of a new round
     public void BeginRound()
@@ -154,6 +157,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                Round3End = true;
                 SetRoundResults();
                 Invoke(nameof(CheckWinner), 3.0f);
             }

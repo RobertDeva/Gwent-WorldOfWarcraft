@@ -4,7 +4,8 @@ using UnityEngine;
 using GwentEngine;
 
 public class Draw : MonoBehaviour
-{    
+{
+    AudioSource DrawCards;
     public bool start = false;
     bool drawed;
     int DrawedCards = 0;

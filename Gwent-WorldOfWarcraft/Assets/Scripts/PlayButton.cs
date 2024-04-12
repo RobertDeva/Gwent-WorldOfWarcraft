@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayButton : MonoBehaviour
 {
+    AudioSource PlayGame;
+    AudioSource TransitionTrack;
 
     private void Start()
     {

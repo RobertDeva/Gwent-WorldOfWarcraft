@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Assets\Cards\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\PlayButton.cs" />
-    <Compile Include="Assets\Scripts\Assign Key.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Cards\Scripts\MoveTo.cs" />

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    AudioSource MainMenuTrack;
+    AudioSource Play;
     public void PlayGame ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

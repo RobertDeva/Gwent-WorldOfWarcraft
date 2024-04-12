@@ -9,6 +9,7 @@ public class CardDisplay : MonoBehaviour
 {
     GameObject ZoomCardP1;
     GameObject ZoomCardP2;
+    AudioSource CastingEffect;
     public Card card;
 
     public TMP_Text CardName;

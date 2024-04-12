@@ -6,9 +6,8 @@ using GwentEngine;
 
 public class Player : MonoBehaviour
 {
-    public List<Card> cards;
-
-    
+    GameObject Faction1;
+    GameObject Faction2;
     public bool Played = false;
     public bool Passed = false;
     public bool Drawed = false;
@@ -16,14 +15,14 @@ public class Player : MonoBehaviour
     public bool StartPlay = false;
 
     public Leader Leader;
+    public List<Card> Cards;
     public GameObject MeleeZone;
     public GameObject RangeZone;
     public GameObject SiegeZone;
     public GameObject MeleeBuff;
     public GameObject RangeBuff;
     public GameObject SiegeBuff;
-    public Stack<Card> Deck;
-
+    
     int MeleeLinePower = 0;
     int RangeLinePower = 0;
     int SiegeLinePower = 0;
@@ -60,13 +59,21 @@ public class Player : MonoBehaviour
             {
                 if(rank == Card.Rank.Silver)
                 {
-                    if(x == true || z == true)
+                    if(z == true)
                     {
                         Power *= 2;
                     }
-                    if(y == true || a == true)
+                    if(y == true)
                     {
-                        Power = Power / 2 + Power % 2;
+                        Power -= 2;
+                    }
+                    if(x == true)
+                    {
+                        Power += 2;
+                    }
+                    if (a == true)
+                    {
+                        Power = 2;
                     }
                     LinePower += Power;
                 }
@@ -103,22 +110,15 @@ public class Player : MonoBehaviour
     {
         TotalPower = MeleeLinePower + RangeLinePower + SiegeLinePower;
     }
+
     public int GetFinalPower()
     {
         int Power = TotalPower;
         return Power;
     }
 
-    public void Pass()
-    {
-        if (IsPlaying == true)
-        {
-            if (Played == false)
-                Passed = true;
-            IsPlaying = false;
-        }
-    }
-    List<Card> Shuffle(List<Card> cards)
+    
+    public static List<Card> Shuffle(List<Card> cards)
     {
         System.Random random = new();
         List<Card> list = new();
@@ -131,13 +131,26 @@ public class Player : MonoBehaviour
         }
         return list;
     }
-   
 
     private void Start()
     {
+       Faction1 = GameObject.Find("FactionP1");
+       Faction2 = GameObject.Find("FactionP2");
+       if(Leader.CardFaction == Card.Faction.Alliance)
+       {
+           foreach (var x in Faction1.GetComponent<FactionDeck>().DeckFaction)
+                Cards.Add(x);
+           
+       }
+       else
+       {
+            foreach (var x in Faction2.GetComponent<FactionDeck>().DeckFaction)
+                Cards.Add(x);
+       }
     }
+   
     void Update()
-     {
+    {
         if(IsPlaying == false || Played == true && Passed == false)
         {
             GetLinePower(MeleeZone);

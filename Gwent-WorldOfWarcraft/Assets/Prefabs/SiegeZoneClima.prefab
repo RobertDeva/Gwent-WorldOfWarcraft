@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 741027309451566651}
   - component: {fileID: 3155994438887043143}
   - component: {fileID: 6754424799081159835}
-  - component: {fileID: 3609290204243685916}
+  - component: {fileID: 2605866016578439649}
   m_Layer: 5
   m_Name: SiegeZoneClima
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3609290204243685916
+--- !u!114 &2605866016578439649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,10 +93,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
-  m_StartCorner: 2
-  m_StartAxis: 1
-  m_CellSize: {x: 170, y: 220}
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
   m_Spacing: {x: 0, y: 0}
-  m_Constraint: 2
-  m_ConstraintCount: 1
+  m_Constraint: 0
+  m_ConstraintCount: 2

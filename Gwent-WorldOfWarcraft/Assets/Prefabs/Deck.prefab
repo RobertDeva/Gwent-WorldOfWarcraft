@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1750096606383002018}
   - component: {fileID: 406085001077528879}
   - component: {fileID: 1093496265333252513}
-  - component: {fileID: 4230493993157133824}
+  - component: {fileID: 8083987547833119087}
   m_Layer: 5
   m_Name: Deck
   m_TagString: Untagged
@@ -121,20 +121,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 406085001077528879}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4230493993157133824}
-        m_TargetAssemblyTypeName: Draw, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4230493993157133824
+      m_Calls: []
+--- !u!114 &8083987547833119087
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3656822617303653865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d903580f274a42048ae8c011644b4606, type: 3}
+  m_Script: {fileID: 11500000, guid: b1692a9918be66248ab5a35e3a63250b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5753710618777975009

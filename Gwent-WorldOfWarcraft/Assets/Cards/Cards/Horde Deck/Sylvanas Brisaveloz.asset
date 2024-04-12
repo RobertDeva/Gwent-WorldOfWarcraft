@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d841110d5806243b3ee0f60516555c, type: 3}
   m_Name: Sylvanas Brisaveloz
   m_EditorClassIdentifier: 
-  CardName: Sylvanas
+  CardName: Sylvanas Brisaveloz
   Attack: 8
   CardFaction: 0
   Cardtipe: 4
-  Position1: 1
+  Position1: 0
   Position2: 1
   Position3: 1
   CardRank: 1
   ID: 4
-  Description: Una elfa nocturna arquera de la Horda que tiene la precision de un
-    sniper
-  Positions: R
+  Description: Sylvanas Brisaveloz llamada la 'Reina Alma en pena' y ex gobernante
+    de los Renegados
+  Positions: M R
   CardFront: {fileID: 21300000, guid: c29c4ff18af065a4eb82e0663abb473b, type: 3}

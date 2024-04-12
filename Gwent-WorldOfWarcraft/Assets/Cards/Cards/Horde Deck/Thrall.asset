@@ -15,12 +15,13 @@ MonoBehaviour:
   CardName: Thrall
   Attack: 9
   CardFaction: 0
-  Cardtipe: 5
+  Cardtipe: 4
   Position1: 0
   Position2: 0
   Position3: 0
   CardRank: 1
   ID: 5
-  Description: Un orco criado por druidas
+  Description: Thrall, hijo de Durotan y Draka llamado 'Chaman Mundial' y fundador
+    de la nacion de Durotar en Kalimdor
   Positions: M
   CardFront: {fileID: 21300000, guid: b03b70a01ae54f4428ea75e6f7c996d8, type: 3}

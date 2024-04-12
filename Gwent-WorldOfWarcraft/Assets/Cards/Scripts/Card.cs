@@ -43,7 +43,8 @@ namespace GwentEngine
             R,
             S,
             U,
-            C
+            W
+
         }
         public enum Rank
         {
@@ -60,6 +61,7 @@ namespace GwentEngine
             DestroyCard,
             CardUp,
             CardDown,
+            DrawCard,
             NoEffect
         }
     }

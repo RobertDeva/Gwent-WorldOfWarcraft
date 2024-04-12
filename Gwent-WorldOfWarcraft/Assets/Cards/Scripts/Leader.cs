@@ -13,7 +13,6 @@ namespace GwentEngine
         public Card.Position Position1;
         public Card.Position Position2;
         public Card.Position Position3;
-        public Card.Rank CardRank = Card.Rank.Special;
         public Effect ID;
         public string Description;
         public string Positions;
@@ -23,7 +22,7 @@ namespace GwentEngine
         {
             SaveCard,
             Upgrade,
-            Clima,
+            Wheater,
             Victory
         }
             

@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 8409172223933372708}
   - component: {fileID: 6513073566705300231}
   - component: {fileID: 6639663975912491500}
+  - component: {fileID: 1508427527111072131}
   m_Layer: 5
   m_Name: Faction
   m_TagString: Untagged
@@ -556,3 +557,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1508427527111072131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010363322333242366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670e0cc5701c59d43bbd485d91072769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

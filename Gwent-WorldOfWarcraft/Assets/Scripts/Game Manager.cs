@@ -55,12 +55,14 @@ public class GameManager : MonoBehaviour
     {
         Turns();
         EndRound();
-        Invoke(nameof(Play), 5.0f);
+        Invoke(nameof(Play), 3.0f);
     }
+    //This method mark the begin of a new round
     public void BeginRound()
     { if (Round3End == false)
             Round.text = "Begins a new round";
     }
+    //This method show what round is playing
     public void CheckRound()
     {
         if (Round1Playing == false)
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //This method check what player is playing
     public void Turns()
     {
         if (!P1.GetComponent<Player>().Passed && !P2.GetComponent<Player>().Passed)
@@ -105,11 +108,36 @@ public class GameManager : MonoBehaviour
     }
 
    
-
+    //This method finish the round
     public void EndRound()
     {
         if (P1.GetComponent<Player>().Passed && P2.GetComponent<Player>().Passed)
         {
+            if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted || GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WheaterCasted)
+            {
+                if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted)
+                {
+                    GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().LeaderEffect();
+                    GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted = false;
+                }
+                else
+                {
+                    GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().LeaderEffect();
+                    GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WheaterCasted = false;
+                }
+            }
+            foreach(Transform card in GameObject.Find("MeleeZoneClima").transform)
+            {
+                card.GetComponent<CardDisplay>().CastEffect();
+            }
+            foreach (Transform card in GameObject.Find("RangeZoneClima").transform)
+            {
+                card.GetComponent<CardDisplay>().CastEffect();
+            }
+            foreach (Transform card in GameObject.Find("SiegeZoneClima").transform)
+            {
+                card.GetComponent<CardDisplay>().CastEffect();
+            }
 
             if (Round1End == false)
             {
@@ -121,25 +149,26 @@ public class GameManager : MonoBehaviour
             {
                 Round2End = true;
                 SetRoundResults();
-                CheckWinner();
+                Invoke(nameof(CheckWinner), 3.0f);
                 RoundIndex++;
             }
             else
             {
                 SetRoundResults();
-                CheckWinner();
+                Invoke(nameof(CheckWinner), 3.0f);
             }
+            GameObject.Find("DeckP1").GetComponent<Draw>().EffectDraw();
+            GameObject.Find("DeckP2").GetComponent<Draw>().EffectDraw();
+            GameObject.Find("DeckP1").GetComponent<Draw>().EffectDraw();
+            GameObject.Find("DeckP2").GetComponent<Draw>().EffectDraw();
             P1.GetComponent<Player>().Passed = false;
             P2.GetComponent<Player>().Passed = false;
             P1Turn = false;
             P2Turn = false;
-            GameObject.Find("DeckP1").GetComponent<Draw>().OnClick();
-            GameObject.Find("DeckP2").GetComponent<Draw>().OnClick();
-            GameObject.Find("DeckP1").GetComponent<Draw>().OnClick();
-            GameObject.Find("DeckP2").GetComponent<Draw>().OnClick();
+            Invoke(nameof(CleanField), 1.0f);
         }
     }
-
+    //This method checks who won the round
     public void SetRoundResults()
     {
         if (RoundIndex == 1)
@@ -260,7 +289,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
+    //This method checks who won the game
     public void CheckWinner()
     {
         if (Round3End == false)
@@ -270,12 +299,12 @@ public class GameManager : MonoBehaviour
                 if (VictoriesP1 > VictoriesP2)
                 {
                     Round.text = "Player 1 wins the game";
-                    Invoke(nameof(EngGame), 3.0f);
+                    Invoke(nameof(EngGame), 5.0f);
                 }
                 else if (VictoriesP1 < VictoriesP2)
                 {
                     Round.text = "Player 2 wins the game";
-                    Invoke(nameof(EngGame), 3.0f);
+                    Invoke(nameof(EngGame), 5.0f);
                 }
             }
         }
@@ -298,17 +327,18 @@ public class GameManager : MonoBehaviour
                     Round.text = "Nobody wins the game";
                     
                 }
-                Invoke(nameof(EngGame), 3.0f);
+                Invoke(nameof(EngGame), 5.0f);
             }
 
         }
     }
-
+    //This method jump to the previous Scene
     public void EngGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
+    //This method start the round
     public void Play()
     {
         if(Round1Playing == false || (Round2Playing == false && Round1End) || (Round3Playing == false && Round2End))
@@ -319,28 +349,124 @@ public class GameManager : MonoBehaviour
         
     }
 
+    //This method switch to  other player turn
     public void P1Pass()
-    {
-        P1start = false;
-        P1.GetComponent<Player>().IsPlaying = false;
-        if(P1.GetComponent<Player>().Played == false)
-            P1.GetComponent<Player>().Passed = true;
-        P1.GetComponent<Player>().Played = false;
-        P1Turn = false;
-        P2Turn = true;
-        Turn.text = "P2 Turn";
+    { 
+        if (P1.GetComponent<Player>().IsPlaying)
+        {
+            P1start = false;
+            P1.GetComponent<Player>().IsPlaying = false;
+            if (P1.GetComponent<Player>().Played == false)
+                P1.GetComponent<Player>().Passed = true;
+            P1.GetComponent<Player>().Played = false;
+            P1Turn = false;
+            P2Turn = true;
+            Turn.text = "P2 Turn";
+        }
     }
+    //This method switch to  other player turn
     public void P2Pass()
-    {   
-        P2start = false;
-        P2.GetComponent<Player>().IsPlaying = false;
-        if (P2.GetComponent<Player>().Played == false)
-            P2.GetComponent<Player>().Passed = true;
-        P2.GetComponent<Player>().Played = false;
-        P2Turn = false;
-        P1Turn = true;
-        Turn.text = "P1 Turn";
+    {
+        if (P2.GetComponent<Player>().IsPlaying)
+        { 
+            P2start = false;
+            P2.GetComponent<Player>().IsPlaying = false;
+            if (P2.GetComponent<Player>().Played == false)
+                P2.GetComponent<Player>().Passed = true;
+            P2.GetComponent<Player>().Played = false;
+            P2Turn = false;
+            P1Turn = true;
+            Turn.text = "P1 Turn";
+        }
+    }
+    //This method clean the field after finish the round
+    public void CleanField()
+    {
+        GameObject CementeryP1 = GameObject.Find("CementeryP1");
+        GameObject CementeryP2 = GameObject.Find("CementeryP2");
+        GameObject MeleeP1 = GameObject.Find("MeleeZoneP1");
+        GameObject MeleeP2 = GameObject.Find("MeleeZoneP2");
+        GameObject RangeP1 = GameObject.Find("RangeZoneP1");
+        GameObject RangeP2 = GameObject.Find("RangeZoneP2");
+        GameObject SiegeP1 = GameObject.Find("SiegeZoneP1");
+        GameObject SiegeP2 = GameObject.Find("SiegeZoneP2");
+        GameObject MeleeWheather = GameObject.Find("MeleeZoneClima");
+        GameObject RangeWheather = GameObject.Find("RangeZoneClima");
+        GameObject SiegeWheather = GameObject.Find("SiegeZoneClima");
+
+        foreach(Transform card in MeleeP1.transform)
+        {
+            if(card.GetComponent<CardDisplay>().BondInField == false)
+            {
+                card.SetParent(CementeryP1.transform);
+                card.gameObject.SetActive(false);
+            }
+        }
+        foreach (Transform card in MeleeP2.transform)
+        {
+            if (card.GetComponent<CardDisplay>().BondInField == false)
+            {
+                card.SetParent(CementeryP2.transform);
+                card.gameObject.SetActive(false);
+            }
+        }
+        foreach (Transform card in RangeP1.transform)
+        {
+            if (card.GetComponent<CardDisplay>().BondInField == false)
+            {
+                card.SetParent(CementeryP1.transform);
+                card.gameObject.SetActive(false);
+            }
+        }
+        foreach (Transform card in RangeP2.transform)
+        {
+            if (card.GetComponent<CardDisplay>().BondInField == false)
+            {
+                card.SetParent(CementeryP2.transform);
+                card.gameObject.SetActive(false);
+            }
+        }
+        foreach (Transform card in SiegeP1.transform)
+        {
+            if (card.GetComponent<CardDisplay>().BondInField == false)
+            {
+                card.SetParent(CementeryP1.transform);
+                card.gameObject.SetActive(false);
+            }
+        }
+        foreach (Transform card in SiegeP2.transform)
+        {
+            if (card.GetComponent<CardDisplay>().BondInField == false)
+            {
+                card.SetParent(CementeryP2.transform);
+                card.gameObject.SetActive(false);
+            }
+        }
+        foreach (Transform card in MeleeWheather.transform)
+        {
+            if (card.GetComponent<CardDisplay>().BondInField == false)
+            {
+                card.SetParent(CementeryP1.transform);
+                card.gameObject.SetActive(false);
+            }
+        }
+        foreach (Transform card in RangeWheather.transform)
+        {
+            if (card.GetComponent<CardDisplay>().BondInField == false)
+            {
+                card.SetParent(CementeryP1.transform);
+                card.gameObject.SetActive(false);
+            }
+        } foreach(Transform card in SiegeWheather.transform)
+        {
+            if(card.GetComponent<CardDisplay>().BondInField == false)
+            {
+                card.SetParent(CementeryP1.transform);
+                card.gameObject.SetActive(false);
+            }
+        }
     }
 
+   
 }
 

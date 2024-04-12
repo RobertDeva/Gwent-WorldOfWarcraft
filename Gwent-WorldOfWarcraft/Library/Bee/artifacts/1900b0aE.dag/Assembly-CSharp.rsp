@@ -378,6 +378,7 @@
 "Assets/Cards/Scripts/Leader.cs"
 "Assets/Cards/Scripts/LeaderCardDisplay.cs"
 "Assets/Cards/Scripts/MoveTo.cs"
+"Assets/ChangeButtonTrasparency.cs"
 "Assets/Draw.cs"
 "Assets/FactionDeck.cs"
 "Assets/Scripts/BackButton.cs"

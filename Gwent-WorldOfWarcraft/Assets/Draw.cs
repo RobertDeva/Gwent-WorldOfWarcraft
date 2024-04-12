@@ -31,6 +31,7 @@ public class Draw : MonoBehaviour
         }
     }
 
+    //This method deal a card to player hand
     public void OnClick()
     {
         if (DrawedCards < Deck.Count && CardsInHand < 10 && drawed == false)
@@ -43,13 +44,18 @@ public class Draw : MonoBehaviour
             player.GetComponent<Player>().Drawed = true;
         }
     }
+
+    //This method deal cards to player hand at begin of  a new round or by card effect
     public void EffectDraw()
     {
-        GameObject card = Instantiate(Card, new Vector2(0, 0), Quaternion.identity);
-        card.GetComponent<CardDisplay>().card = Deck[DrawedCards];
-        card.transform.SetParent(Hand.transform, false);
-        DrawedCards++;
-        CardsInHand++;
+        if (DrawedCards < Deck.Count && CardsInHand < 10)
+        {
+            GameObject card = Instantiate(Card, new Vector2(0, 0), Quaternion.identity);
+            card.GetComponent<CardDisplay>().card = Deck[DrawedCards];
+            card.transform.SetParent(Hand.transform, false);
+            DrawedCards++;
+            CardsInHand++;
+        }
     }
     
     

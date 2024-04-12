@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public TMP_Text SLP;
     public TMP_Text TP;
 
+    //This Method calculate player power on each line constantly
     public void GetLinePower(GameObject LineZone)
     {
         int LinePower = 0;
@@ -105,19 +106,21 @@ public class Player : MonoBehaviour
 
         
     }
-    
+
+    //This Method calculate player total power constantly
     public void GetTotalPower()
     {
         TotalPower = MeleeLinePower + RangeLinePower + SiegeLinePower;
     }
 
+    //This Method return player total power
     public int GetFinalPower()
     {
         int Power = TotalPower;
         return Power;
     }
 
-    
+    //This Method Shuffle a list of cards
     public static List<Card> Shuffle(List<Card> cards)
     {
         System.Random random = new();
@@ -132,7 +135,7 @@ public class Player : MonoBehaviour
         return list;
     }
 
-    private void Start()
+    void Start()
     {
        Faction1 = GameObject.Find("FactionP1");
        Faction2 = GameObject.Find("FactionP2");

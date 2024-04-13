@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public bool Drawed = false;
     public bool IsPlaying = false;
     public bool StartPlay = false;
+    public bool SustituteSelected = false;
 
     public Leader Leader;
     public List<Card> Cards;
@@ -74,7 +75,7 @@ public class Player : MonoBehaviour
                     }
                     if (a == true)
                     {
-                        Power = 2;
+                        Power = 1;
                     }
                     LinePower += Power;
                 }

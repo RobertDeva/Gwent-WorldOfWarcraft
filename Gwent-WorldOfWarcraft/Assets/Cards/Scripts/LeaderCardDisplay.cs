@@ -24,10 +24,15 @@ public class LeaderCardDisplay : MonoBehaviour
     public Card.Position Position3;
     public Leader.Effect ID;
     string Description;
+    string EffectDescription;
     public GameObject Player;
+    GameObject ZoomCardP1;
+    GameObject ZoomCardP2;
 
     void Start()
     {
+        ZoomCardP1 = GameObject.Find("ZoomCardP1");
+        ZoomCardP2 = GameObject.Find("ZoomCardP2");
         WheaterCasted = false;
         card = Player.GetComponent<Player>().Leader;
 
@@ -38,10 +43,11 @@ public class LeaderCardDisplay : MonoBehaviour
         Position3 = card.Position3;
         ID = card.ID;
         Description = card.Description;
+        SetEffectDescription();
 
         // Esto es lo que se muestra en la interfaz
         CardName.text = Name;
-        CardDescription.text = Description;
+        CardDescription.text = "Descripcion: " + Description +"\nEfecto: " + EffectDescription;
         Positions.text = card.Positions;
         ArtWork.sprite = card.CardFront;
               
@@ -246,7 +252,7 @@ public class LeaderCardDisplay : MonoBehaviour
 
                 Player.GetComponent<Player>().Played = true;
             }
-            if (ID == Leader.Effect.Wheater)
+            if (ID == Leader.Effect.Weather)
             {
                 if (Position1 == Card.Position.M || Position2 == Card.Position.M || Position3 == Card.Position.M)
                 {
@@ -290,6 +296,47 @@ public class LeaderCardDisplay : MonoBehaviour
 
         }
     }
+    void SetEffectDescription()
+    {
+        if (ID == Leader.Effect.Upgrade)
+        {
+            EffectDescription = "Duplica el ataque de las Unidades de cada fila de las posiciones del Leader";
+        }
+        else if (ID == Leader.Effect.Weather)
+        {
+            EffectDescription = "Reduce el ataque de las Unidades de cada fila de las posiciones del Leader a 2";
+        }
+        else
+        {
+            EffectDescription = "Una carta al azar al final de la ronda se queda en el campo";
+        }
+    }
+    public void OnHoverEnter()
+    {
+        GameObject P1 = GameObject.Find("LeaderZone1");
+        GameObject P2 = GameObject.Find("LeaderZone2");
+
+        if (transform.parent == P1.transform)
+        {
+            ZoomCardP1.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
+            ZoomCardP1.GetComponent<ZoomCard>().Positions.text = Positions.text;
+            ZoomCardP1.GetComponent<ZoomCard>().Name.text = CardName.text;
+            ZoomCardP1.GetComponent<ZoomCard>().Attack.text = "  ";
+            ZoomCardP1.GetComponent<ZoomCard>().CardTipe.text = "Leader"; 
+            ZoomCardP1.GetComponent<ZoomCard>().Description.text = CardDescription.text;
+        }
+        else if(transform.parent == P2.transform)
+        {
+            ZoomCardP2.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
+            ZoomCardP2.GetComponent<ZoomCard>().Positions.text = Positions.text;
+            ZoomCardP2.GetComponent<ZoomCard>().Name.text = CardName.text;
+            ZoomCardP2.GetComponent<ZoomCard>().Attack.text = "  ";
+            ZoomCardP2.GetComponent<ZoomCard>().CardTipe.text = "Leader";
+            ZoomCardP2.GetComponent<ZoomCard>().Description.text = CardDescription.text;
+        }
+    }
+        
+
 }
        
  

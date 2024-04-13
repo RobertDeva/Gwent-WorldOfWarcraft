@@ -9,7 +9,7 @@ public class CardDisplay : MonoBehaviour
 {
     GameObject ZoomCardP1;
     GameObject ZoomCardP2;
-    AudioSource CastingEffect;
+    public AudioSource CastingEffect;
     public Card card;
 
     public TMP_Text CardName;
@@ -29,7 +29,7 @@ public class CardDisplay : MonoBehaviour
     public Card.Effect ID;
     public Card.Rank CardRank;
     public string Description;
-    public string EffectDescripion;
+    public string EffectDescription;
     
     // Start is called before the first frame update
     void Start()
@@ -52,7 +52,7 @@ public class CardDisplay : MonoBehaviour
 
             // Esto es lo que se muestra en la interfaz
             CardName.text = Name;
-            CardDescription.text = " Descripcion: " + Description +"." + "\n Efecto: " + EffectDescripion + ".";
+            CardDescription.text = " Descripcion: " + Description +"." + "\n Efecto: " + EffectDescription + ".";
             CardTipe.text = Cardtipe.ToString();
         if (AttackPower != 0 || Cardtipe == Card.CardTipe.Lure)
             Attack.text = AttackPower.ToString();
@@ -72,6 +72,12 @@ public class CardDisplay : MonoBehaviour
     //This method cast Card effect
     public void CastEffect()
     {
+        Invoke(nameof(Effect), 3.0f);
+    }
+
+    void Effect()
+    {
+        
         GameObject MeleeP1 = GameObject.Find("MeleeZoneP1");
         GameObject MeleeP2 = GameObject.Find("MeleeZoneP2");
         GameObject RangeP1 = GameObject.Find("RangeZoneP1");
@@ -88,6 +94,7 @@ public class CardDisplay : MonoBehaviour
         GameObject RangeWheather = GameObject.Find("RangeZoneClima");
         GameObject SiegeWheather = GameObject.Find("SiegeZoneClima");
 
+      //  CastingEffect.Play();
         if ((transform.parent == MeleeWheather.transform || transform.parent == RangeWheather.transform || transform.parent == SiegeWheather.transform) && ID == Card.Effect.Weather && Cardtipe == Card.CardTipe.Weather)
         {
             if (transform.parent == MeleeWheather.transform)
@@ -260,7 +267,7 @@ public class CardDisplay : MonoBehaviour
                         card.SetParent(GameObject.Find("CementeryP2").transform);
                     }
                 }
-                
+
                 transform.SetParent(GameObject.Find("CementeryP2").transform);
             }
 
@@ -276,7 +283,7 @@ public class CardDisplay : MonoBehaviour
         }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.CardUp && Cardtipe == Card.CardTipe.Unit)
         {
-            foreach(Transform card in transform.parent)
+            foreach (Transform card in transform.parent)
             {
                 card.GetComponent<CardDisplay>().Buffed = true;
             }
@@ -290,16 +297,16 @@ public class CardDisplay : MonoBehaviour
         }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.DestroyCard && Cardtipe == Card.CardTipe.Unit)
         {
-            if(transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform)
+            if (transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform)
             {
                 System.Random rand = new();
                 int count = 0;
                 int index;
 
-                foreach(Transform card in MeleeP2.transform)
+                foreach (Transform card in MeleeP2.transform)
                 {
                     CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if(rb != null)
+                    if (rb != null)
                         count++;
                 }
                 foreach (Transform card in RangeP2.transform)
@@ -440,45 +447,78 @@ public class CardDisplay : MonoBehaviour
             GameObject.Find("DeckP1").GetComponent<Draw>().EffectDraw();
             GameObject.Find("DeckP2").GetComponent<Draw>().EffectDraw();
         }
-       
+        else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.Lure && Cardtipe == Card.CardTipe.Lure)
+        {
+            if (transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || SiegeP1.transform)
+            {
+                foreach (Transform card in transform.parent)
+                {
+                    if (card.GetComponent<CardDisplay>().InField == false)
+                    {
+                        card.transform.SetParent(GameObject.Find("HandP1").transform, false);
+                        break;
+                    }
+                }
+                foreach (Transform card in transform.parent)
+                {
+                    card.GetComponent<CardDisplay>().InField = true;
+                }
+            }
+            else
+            {
+                foreach (Transform card in transform.parent)
+                {
+                    if (card.GetComponent<CardDisplay>().InField == false)
+                    {
+                        card.transform.SetParent(GameObject.Find("HandP2").transform, false);
+                        break;
+                    }
+                }
+                foreach (Transform card in transform.parent)
+                {
+                    card.GetComponent<CardDisplay>().InField = true;
+                }
+            }
+        }
+      // Invoke(nameof(CastingEffect.Pause), 1.0f);
     }
     void SetEffectDescription()
     {
         if (ID == Card.Effect.Upgrade)
         {
-            EffectDescripion = "Duplica el ataque de las Unidades de una fila";
+            EffectDescription = "Duplica el ataque de las Unidades de una fila";
         }
         else if (ID == Card.Effect.Weather)
         {
-            EffectDescripion = "Reduce el ataque de las Unidades de una fila a 2";
+            EffectDescription = "Reduce el ataque de las Unidades de una fila a 2";
         }
         else if (ID == Card.Effect.Lure)
         {
-            EffectDescripion = "Sustituye una carta en tu lado del campo y la regresa a tu mano";
+            EffectDescription = "Sustituye una carta en tu lado del campo y la regresa a tu mano";
         }
         else if (ID == Card.Effect.ClearWeather)
         {
-            EffectDescripion = "Elimina el efecto de una carta clima en la fila y destruye la carta clima";
+            EffectDescription = "Elimina el efecto de una carta clima en la fila y destruye la carta clima";
         }
         else if(ID == Card.Effect.CardUp)
         {
-            EffectDescripion = "Aumenta en 2 el ataque de todas las Unidades de una fila";
+            EffectDescription = "Aumenta en 2 el ataque de todas las Unidades de una fila";
         }
         else if (ID == Card.Effect.CardDown)
         {
-            EffectDescripion = "Disminuye en 2 el ataque de todas las Unidades de una fila";
+            EffectDescription = "Disminuye en 2 el ataque de todas las Unidades de una fila";
         }
         else if (ID == Card.Effect.DestroyCard)
         {
-            EffectDescripion = "Destruye una carta al azar del campo contrario";
+            EffectDescription = "Destruye una carta al azar del campo contrario";
         }
         else if(ID == Card.Effect.DrawCard)
         {
-            EffectDescripion = "Los jugadores roban una carta";
+            EffectDescription = "Los jugadores roban una carta";
         }
         else
         {
-            EffectDescripion = "No Effect";
+            EffectDescription = "No Effect";
         }
     }
 
@@ -532,4 +572,21 @@ public class CardDisplay : MonoBehaviour
         }
     }
 
+    public void OnMouseDown()
+    {
+        if(InField && (transform.parent != GameObject.Find("HandP1").transform || transform.parent != GameObject.Find("HandP2").transform))
+        {
+            if((transform.parent == GameObject.Find("MeleeZoneP1").transform || transform.parent == GameObject.Find("RangeZoneP1").transform || transform.parent == GameObject.Find("SiegeZoneP1").transform) && GameObject.Find("Player1").GetComponent<Player>().IsPlaying && GameObject.Find("Player1").GetComponent<Player>().SustituteSelected == false)
+            {
+                InField = false;
+                GameObject.Find("Player1").GetComponent<Player>().SustituteSelected = true;
+            }
+            else if((transform.parent == GameObject.Find("MeleeZoneP2").transform || transform.parent == GameObject.Find("RangeZoneP2").transform || transform.parent == GameObject.Find("SiegeZoneP2").transform) && GameObject.Find("Player2").GetComponent<Player>().IsPlaying && GameObject.Find("Player2").GetComponent<Player>().SustituteSelected == false)
+            {
+                InField = false;
+                GameObject.Find("Player2").GetComponent<Player>().SustituteSelected = true;
+            }
+
+        }
+    }
 }

@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayButton : MonoBehaviour
 {
-    AudioSource PlayGame;
-    AudioSource TransitionTrack;
+    public AudioSource PlayGame;
+    public AudioSource TransitionTrack;
 
     private void Start()
     {
-        
+       // TransitionTrack.Play();
     }
     public void Play()
     {
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
    

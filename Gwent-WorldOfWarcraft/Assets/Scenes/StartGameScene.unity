@@ -628,6 +628,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1680612649}
     - target: {fileID: 111260052445222606, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
+      propertyPath: BattleTrack
+      value: 
+      objectReference: {fileID: 1905001135}
+    - target: {fileID: 111260052445222606, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
       propertyPath: Round1ResultsP1
       value: 
       objectReference: {fileID: 2037857199}
@@ -654,6 +658,18 @@ PrefabInstance:
     - target: {fileID: 1394588408611355099, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
       propertyPath: m_Name
       value: GameTracker
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098647438747354878, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098647438747354878, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 13101c6de4efe214d911bb3787411aaa, type: 3}
+    - target: {fileID: 2098647438747354878, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4180908523203124153, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
       propertyPath: m_Pivot.x
@@ -3360,6 +3376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18bf9f1e6cdacbf48839a4ac48297174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1905001135 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2098647438747354878, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
+  m_PrefabInstance: {fileID: 542062613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1921348394 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5051226905496395792, guid: 45d99c9e46a07424aa0fd64d6edc0c11, type: 3}

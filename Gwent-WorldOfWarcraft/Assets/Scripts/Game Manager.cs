@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    AudioSource GameTrack;
+    public AudioSource BattleTrack;
     AudioSource EndRoundTrack;
     AudioSource StartRoundTrack;
+    bool P1LastWinner = false;
+    bool P2LastWinner = false;
     bool Round1Playing = false;
     bool Round1End = false;
     bool Round2Playing = false;
@@ -57,8 +59,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Turns();
-        Invoke(nameof(EndRound), 1.0f);
-        Invoke(nameof(Play), 4.0f);
+        Invoke(nameof(EndRound), 0.5f);
+        Invoke(nameof(Play), 1.0f);
     }
     //This method mark the begin of a new round
     public void BeginRound()
@@ -88,24 +90,20 @@ public class GameManager : MonoBehaviour
     //This method check what player is playing
     public void Turns()
     {
-        if (!P1.GetComponent<Player>().Passed && !P2.GetComponent<Player>().Passed)
+        if (P1.GetComponent<Player>().Passed == false && P2.GetComponent<Player>().Passed == false)
         { 
-            if(P1.GetComponent<Player>().Passed)
-            {
-                P1Turn = false;
-                P2Turn = true;
-            }
+            
             if(P1Turn || P1start || P2.GetComponent<Player>().Passed)
             {
                 P1Turn = true;
                 P2.GetComponent<Player>().Drawed = false;
-                foreach(Transform card in GameObject.Find("HandP1").transform)
-                {
-                    card.gameObject.SetActive(true);
-                }
                 foreach (Transform card in GameObject.Find("HandP2").transform)
                 {
                     card.gameObject.SetActive(false);
+                }
+                foreach (Transform card in GameObject.Find("HandP1").transform)
+                {
+                    card.gameObject.SetActive(true);
                 }
 
                 Turn.text = "P1 Turn";
@@ -113,14 +111,10 @@ public class GameManager : MonoBehaviour
                      P1.GetComponent<Player>().IsPlaying = true;
                 P1start = false;
             }
-            if (P2.GetComponent<Player>().Passed)
+            
+            if (P2Turn || P2start || P1.GetComponent<Player>().Passed)
             {
                 P1Turn = true;
-                P2Turn = false;
-            }
-            else if (P2Turn || P2start || P1.GetComponent<Player>().Passed)
-            {
-                P2Turn = true;
                 P1.GetComponent<Player>().Drawed = false;
                 foreach (Transform card in GameObject.Find("HandP2").transform)
                 {
@@ -133,7 +127,6 @@ public class GameManager : MonoBehaviour
                 Turn.text = "P2 Turn";
                 if (!P2.GetComponent<Player>().Played)
                     P2.GetComponent<Player>().IsPlaying = true;
-               
                 P2start = false;
             }
         }
@@ -145,6 +138,7 @@ public class GameManager : MonoBehaviour
     {
         if (P1.GetComponent<Player>().Passed && P2.GetComponent<Player>().Passed)
         {
+            BattleTrack.Pause();
             if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted || GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WheaterCasted)
             {
                 if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted)
@@ -172,23 +166,23 @@ public class GameManager : MonoBehaviour
             }
 
             if (Round1End == false)
-            {
-                Round1End = true;
+            {               
                 SetRoundResults();
+                Round1End = true;
                 RoundIndex++;
             }
-            else if (Round2End == false)
-            {
-                Round2End = true;
+            else if(Round2End == false)
+            {               
                 SetRoundResults();
-                Invoke(nameof(CheckWinner), 3.0f);
+                Round2End = true;
+                Invoke(nameof(CheckWinner), 1.0f);
                 RoundIndex++;
             }
             else
-            {
-                Round3End = true;
+            {               
                 SetRoundResults();
-                Invoke(nameof(CheckWinner), 3.0f);
+                Round3End = true;
+                Invoke(nameof(CheckWinner), 1.0f);
             }
             GameObject.Find("DeckP1").GetComponent<Draw>().EffectDraw();
             GameObject.Find("DeckP2").GetComponent<Draw>().EffectDraw();
@@ -196,15 +190,13 @@ public class GameManager : MonoBehaviour
             GameObject.Find("DeckP2").GetComponent<Draw>().EffectDraw();
             P1.GetComponent<Player>().Passed = false;
             P2.GetComponent<Player>().Passed = false;
-            P1Turn = false;
-            P2Turn = false;
             Invoke(nameof(CleanField), 1.0f);
         }
     }
     //This method checks who won the round
     public void SetRoundResults()
     {
-        if (RoundIndex == 1)
+        if(Round3End == false)
         {
             int PowerP1 = P1.GetComponent<Player>().GetFinalPower();
             int PowerP2 = P2.GetComponent<Player>().GetFinalPower();
@@ -217,8 +209,11 @@ public class GameManager : MonoBehaviour
                 VictoriesP1++;
                 Round.text = "Player 1 wins the round";
                 P1start = true;
+                P1Turn = true;
                 P2Turn = false;
                 P2start = false;
+                P1LastWinner = true;
+                P2LastWinner = false;
             }
             else if (PowerP1 < PowerP2)
             {
@@ -232,6 +227,9 @@ public class GameManager : MonoBehaviour
                 P1start = false;
                 P1Turn = false;
                 P2start = true;
+                P2Turn = true;
+                P2LastWinner = true;
+                P1LastWinner = false;
             }
             else if (PowerP1 == PowerP2)
             {
@@ -243,86 +241,27 @@ public class GameManager : MonoBehaviour
                 VictoriesP1++;
                 VictoriesP2++;
                 Round.text = "Nobody wins the round";
-            }
-        }
-        else if (RoundIndex == 2)
-        {
-            int PowerP1 = P1.GetComponent<Player>().GetFinalPower();
-            int PowerP2 = P2.GetComponent<Player>().GetFinalPower();
-            if (PowerP1 > PowerP2)
-            {
-                Round1ResultsP1.text = RoundResult.W.ToString();
-                ResultsP1[RoundIndex - 1] = RoundResult.W;
-                Round1ResultsP2.text = RoundResult.L.ToString();
-                ResultsP2[RoundIndex - 1] = RoundResult.L;
-                VictoriesP1++;
-                Round.text = "Player 1 wins the round";
-                P1start = true;
-                P2Turn = false;
-                P2start = false;
-            }
-            else if (PowerP1 < PowerP2)
-            {
-
-                Round1ResultsP1.text = RoundResult.L.ToString();
-                ResultsP1[RoundIndex - 1] = RoundResult.L;
-                Round1ResultsP2.text = RoundResult.W.ToString();
-                ResultsP2[RoundIndex - 1] = RoundResult.W;
-                VictoriesP2++;
-                Round.text = "Player 2 wins the round";
-                P1start = false;
-                P1Turn = false;
-                P2start = true;
-            }
-            else if (PowerP1 == PowerP2)
-            {
-
-                Round1ResultsP1.text = RoundResult.T.ToString();
-                ResultsP1[RoundIndex - 1] = RoundResult.T;
-                Round1ResultsP2.text = RoundResult.T.ToString();
-                ResultsP2[RoundIndex - 1] = RoundResult.T;
-                VictoriesP1++;
-                VictoriesP2++;
-                Round.text = "Nobody wins the round";
-            }
-        }
-        else if (RoundIndex == 3)
-        {
-            int PowerP1 = P1.GetComponent<Player>().GetFinalPower();
-            int PowerP2 = P2.GetComponent<Player>().GetFinalPower();
-            if (PowerP1 > PowerP2)
-            {
-                Round1ResultsP1.text = RoundResult.W.ToString();
-                ResultsP1[RoundIndex - 1] = RoundResult.W;
-                Round1ResultsP2.text = RoundResult.L.ToString();
-                ResultsP2[RoundIndex - 1] = RoundResult.L;
-                VictoriesP1++;
-                Round.text = "Player 1 wins the round";
-                P1start = true;
-                P2start = false;
-            }
-            else if (PowerP1 < PowerP2)
-            {
-
-                Round1ResultsP1.text = RoundResult.L.ToString();
-                ResultsP1[RoundIndex - 1] = RoundResult.L;
-                Round1ResultsP2.text = RoundResult.W.ToString();
-                ResultsP2[RoundIndex - 1] = RoundResult.W;
-                VictoriesP2++;
-                Round.text = "Player 2 wins the round";
-                P1start = false;
-                P2start = true;
-            }
-            else if (PowerP1 == PowerP2)
-            {
-
-                Round1ResultsP1.text = RoundResult.T.ToString();
-                ResultsP1[RoundIndex - 1] = RoundResult.T;
-                Round1ResultsP2.text = RoundResult.T.ToString();
-                ResultsP2[RoundIndex - 1] = RoundResult.T;
-                VictoriesP1++;
-                VictoriesP2++;
-                Round.text = "Nobody wins the round";
+               if(P1LastWinner)
+               {
+                    P1start = true;
+                    P1Turn = true;
+                    P2Turn = false;
+                    P2start = false;
+               }
+               if(P2LastWinner)
+               {
+                    P1start = false;
+                    P1Turn = false;
+                    P2Turn = true;
+                    P2start = true;
+               }
+               else
+               {
+                    P1start = true;
+                    P1Turn = true;
+                    P2Turn = false;
+                    P2start = false;
+               }
             }
         }
     }
@@ -336,12 +275,12 @@ public class GameManager : MonoBehaviour
                 if (VictoriesP1 > VictoriesP2)
                 {
                     Round.text = "Player 1 wins the game";
-                    Invoke(nameof(EngGame), 5.0f);
+                    Invoke(nameof(EngGame), 2.0f);
                 }
                 else if (VictoriesP1 < VictoriesP2)
                 {
                     Round.text = "Player 2 wins the game";
-                    Invoke(nameof(EngGame), 5.0f);
+                    Invoke(nameof(EngGame), 2.0f);
                 }
             }
         }
@@ -364,7 +303,7 @@ public class GameManager : MonoBehaviour
                     Round.text = "Nobody wins the game";
                     
                 }
-                Invoke(nameof(EngGame), 5.0f);
+                Invoke(nameof(EngGame), 2.0f);
             }
 
         }
@@ -381,7 +320,9 @@ public class GameManager : MonoBehaviour
         if(Round1Playing == false || (Round2Playing == false && Round1End) || (Round3Playing == false && Round2End))
         {
             BeginRound();
-            Invoke(nameof(CheckRound), 2.0f);
+            BattleTrack.Play();
+            Invoke(nameof(CheckRound), 0.7f);
+            
         }
         
     }
@@ -412,11 +353,12 @@ public class GameManager : MonoBehaviour
                 P2Turn = true;
                 P2.GetComponent<Player>().IsPlaying = true;
                 Turn.text = "P2 Turn";
+            }
                 foreach (Transform card in GameObject.Find("HandP1").transform)
                 {
                     card.gameObject.SetActive(false);
                 }
-            }
+            
 
         }
     }
@@ -446,11 +388,12 @@ public class GameManager : MonoBehaviour
                 P1Turn = true;
                 P1.GetComponent<Player>().IsPlaying = true;
                 Turn.text = "P1 Turn";
+            }
                 foreach (Transform card in GameObject.Find("HandP2").transform)
                 {
                     card.gameObject.SetActive(false);
                 }
-            }
+            
             
         }
     }

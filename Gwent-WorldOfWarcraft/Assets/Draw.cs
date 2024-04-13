@@ -5,30 +5,31 @@ using GwentEngine;
 
 public class Draw : MonoBehaviour
 {
-    AudioSource DrawCards;
+    public AudioSource DrawCards;
     public bool start = false;
     bool drawed;
     int DrawedCards = 0;
-    public int CardsInHand = 10;
+    public int CardsInHand;
     public GameObject player;
     public GameObject Card;
     public GameObject Hand;
     List<Card> Deck;
     
-    void Update()
+    void Start()
     {
         drawed = player.GetComponent<Player>().Drawed;
-        if(start == false)
+        Deck = Player.Shuffle(player.GetComponent<Player>().Cards);
+        CardsInHand = 0;
+    }
+    private void Update()
+    {
+        if (!start)
         {
-            Deck = Player.Shuffle(player.GetComponent<Player>().Cards);
-            for (int i = 0; i < 10; i++)
+            Invoke(nameof(EffectDraw), 1.5f);
+            if (CardsInHand == 10)
             {
-                GameObject card = Instantiate(Card, new Vector2(0, 0), Quaternion.identity);
-                card.GetComponent<CardDisplay>().card = Deck[DrawedCards];
-                DrawedCards++;
-                card.transform.SetParent(Hand.transform, false);
+                start = true;
             }
-            start = true;
         }
     }
 

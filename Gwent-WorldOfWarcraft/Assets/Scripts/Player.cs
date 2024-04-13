@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     public bool Passed = false;
     public bool Drawed = false;
     public bool IsPlaying = false;
-    public bool StartPlay = false;
     public bool SustituteSelected = false;
 
     public Leader Leader;

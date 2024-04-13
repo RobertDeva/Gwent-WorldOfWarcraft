@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1d841110d5806243b3ee0f60516555c, type: 3}
-  m_Name: New Card
+  m_Name: Maga de fuego
   m_EditorClassIdentifier: 
-  CardName: 
-  Attack: 0
-  CardFaction: 0
+  CardName: Maga de fuego
+  Attack: 5
+  CardFaction: 1
   Cardtipe: 4
   Position1: 1
   Position2: 2
   Position3: 2
-  CardRank: 1
-  ID: 4
-  Description: 
+  CardRank: 2
+  ID: 7
+  Description: Una talentos maga que viaja por Azeroth ganando experiencia
   Positions: R S
-  CardFront: {fileID: 0}
+  CardFront: {fileID: 21300000, guid: 58c565b0003e67742b14f0ae3f7ceba8, type: 3}

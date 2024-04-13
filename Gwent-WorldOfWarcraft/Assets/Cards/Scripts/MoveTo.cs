@@ -26,9 +26,9 @@ public class MoveTo: MonoBehaviour
     GameObject MeleeWheather;
     GameObject RangeWheather;
     GameObject SiegeWheather;
-    AudioSource WheaterSet;
-    AudioSource UnitSet;
-    AudioSource UpgadeSet;
+    public AudioSource WheaterSet;
+    public AudioSource UnitSet;
+    public AudioSource UpgadeSet;
     readonly int WheatherLimit = 1;
 
     Transform startParent;

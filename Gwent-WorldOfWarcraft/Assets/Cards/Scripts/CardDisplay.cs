@@ -30,36 +30,36 @@ public class CardDisplay : MonoBehaviour
     public Card.Rank CardRank;
     public string Description;
     public string EffectDescription;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         ZoomCardP1 = GameObject.Find("ZoomCardP1");
         ZoomCardP2 = GameObject.Find("ZoomCardP2");
 
-            // Son las propiedades de la carta
-            Name = card.CardName;
-            AttackPower = card.Attack;
-            CardFaction = card.CardFaction;
-            Cardtipe = card.Cardtipe;
-            Position1 = card.Position1;
-            Position2 = card.Position2;
-            Position3 = card.Position3;
-            ID = card.ID;
-            CardRank = card.CardRank;
-            Description = card.Description;
-            SetEffectDescription();
+        // Son las propiedades de la carta
+        Name = card.CardName;
+        AttackPower = card.Attack;
+        CardFaction = card.CardFaction;
+        Cardtipe = card.Cardtipe;
+        Position1 = card.Position1;
+        Position2 = card.Position2;
+        Position3 = card.Position3;
+        ID = card.ID;
+        CardRank = card.CardRank;
+        Description = card.Description;
+        SetEffectDescription();
 
-            // Esto es lo que se muestra en la interfaz
-            CardName.text = Name;
-            CardDescription.text = " Descripcion: " + Description +"." + "\n Efecto: " + EffectDescription + ".";
-            CardTipe.text = Cardtipe.ToString();
+        // Esto es lo que se muestra en la interfaz
+        CardName.text = Name;
+        CardDescription.text = " Descripcion: " + Description + "." + "\n Efecto: " + EffectDescription + ".";
+        CardTipe.text = Cardtipe.ToString();
         if (AttackPower != 0 || Cardtipe == Card.CardTipe.Lure)
             Attack.text = AttackPower.ToString();
         else
             Attack.text = "  ";
         ArtWork.sprite = card.CardFront;
-        Positions.text = card.Positions;           
+        Positions.text = card.Positions;
     }
     public bool InField = false;
     public bool Upgraded = false;
@@ -77,7 +77,7 @@ public class CardDisplay : MonoBehaviour
 
     void Effect()
     {
-        
+
         GameObject MeleeP1 = GameObject.Find("MeleeZoneP1");
         GameObject MeleeP2 = GameObject.Find("MeleeZoneP2");
         GameObject RangeP1 = GameObject.Find("RangeZoneP1");
@@ -94,7 +94,7 @@ public class CardDisplay : MonoBehaviour
         GameObject RangeWheather = GameObject.Find("RangeZoneClima");
         GameObject SiegeWheather = GameObject.Find("SiegeZoneClima");
 
-      //  CastingEffect.Play();
+        CastingEffect.Play();
         if ((transform.parent == MeleeWheather.transform || transform.parent == RangeWheather.transform || transform.parent == SiegeWheather.transform) && ID == Card.Effect.Weather && Cardtipe == Card.CardTipe.Weather)
         {
             if (transform.parent == MeleeWheather.transform)
@@ -193,23 +193,20 @@ public class CardDisplay : MonoBehaviour
                 if (transform.parent == MeleeP1.transform)
                 {
                     foreach (Transform card in MeleeWheather.transform)
-                    {
-                        card.GetComponent<CardDisplay>().InField = false;
+                    { 
                         card.SetParent(GameObject.Find("CementeryP1").transform);
                     }
-
+                    transform.SetParent(GameObject.Find("CementeryP1").transform, false);
                 }
                 else
                 {
                     foreach (Transform card in MeleeWheather.transform)
                     {
-                        card.GetComponent<CardDisplay>().InField = false;
                         card.SetParent(GameObject.Find("CementeryP2").transform);
                     }
-
+                    transform.SetParent(GameObject.Find("CementeryP2").transform, false);
                 }
-
-
+                
             }
             else if (transform.parent == RangeP1.transform || transform.parent == RangeP2.transform)
             {
@@ -225,18 +222,17 @@ public class CardDisplay : MonoBehaviour
                 {
                     foreach (Transform card in RangeWheather.transform)
                     {
-                        card.GetComponent<CardDisplay>().InField = false;
                         card.SetParent(GameObject.Find("CementeryP1").transform);
                     }
-
+                    transform.SetParent(GameObject.Find("CementeryP1").transform, false);
                 }
                 else
                 {
                     foreach (Transform card in RangeWheather.transform)
                     {
-                        card.GetComponent<CardDisplay>().InField = false;
                         card.SetParent(GameObject.Find("CementeryP2").transform);
                     }
+                    transform.SetParent(GameObject.Find("CementeryP2").transform, false);
                 }
 
             }
@@ -254,18 +250,17 @@ public class CardDisplay : MonoBehaviour
                 {
                     foreach (Transform card in SiegeWheather.transform)
                     {
-                        card.GetComponent<CardDisplay>().InField = false;
                         card.SetParent(GameObject.Find("CementeryP1").transform);
                     }
-
+                    transform.SetParent(GameObject.Find("CementeryP1").transform, false);
                 }
                 else
                 {
                     foreach (Transform card in SiegeWheather.transform)
                     {
-                        card.GetComponent<CardDisplay>().InField = false;
                         card.SetParent(GameObject.Find("CementeryP2").transform);
                     }
+                    transform.SetParent(GameObject.Find("CementeryP2").transform, false);
                 }
 
                 transform.SetParent(GameObject.Find("CementeryP2").transform);
@@ -290,10 +285,48 @@ public class CardDisplay : MonoBehaviour
         }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.CardDown && Cardtipe == Card.CardTipe.Unit)
         {
-            foreach (Transform card in transform.parent)
-            {
-                card.GetComponent<CardDisplay>().Debuffed = true;
-            }
+           if(transform.parent == MeleeP1.transform)
+           {
+                foreach(Transform card in MeleeP2.transform)
+                {
+                    card.GetComponent <CardDisplay>().Debuffed = true;
+                }
+           }
+           else if (transform.parent == MeleeP2.transform)
+           {
+               foreach (Transform card in MeleeP1.transform)
+               {
+                   card.GetComponent<CardDisplay>().Debuffed = true;
+               }
+           }
+           else if (transform.parent == RangeP1.transform)
+           {
+               foreach (Transform card in RangeP2.transform)
+               {
+                  card.GetComponent<CardDisplay>().Debuffed = true;
+               }
+           }
+           else if (transform.parent == RangeP2.transform)
+           {
+               foreach (Transform card in RangeP1.transform)
+               {
+                   card.GetComponent<CardDisplay>().Debuffed = true;
+               }
+           }
+           else  if (transform.parent == SiegeP1.transform)
+           {
+               foreach (Transform card in SiegeP2.transform)
+               {
+                   card.GetComponent<CardDisplay>().Debuffed = true;
+               }
+           }
+           else
+           {
+               foreach (Transform card in SiegeP1.transform)
+               {
+                   card.GetComponent<CardDisplay>().Debuffed = true;
+               }
+           }
         }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.DestroyCard && Cardtipe == Card.CardTipe.Unit)
         {
@@ -453,35 +486,36 @@ public class CardDisplay : MonoBehaviour
             {
                 foreach (Transform card in transform.parent)
                 {
-                    if (card.GetComponent<CardDisplay>().InField == false)
+                    if (card.GetComponent<CardDisplay>().Selected)
                     {
+                        card.GetComponent<CardDisplay>().InField = false;
                         card.transform.SetParent(GameObject.Find("HandP1").transform, false);
                         break;
                     }
                 }
                 foreach (Transform card in transform.parent)
                 {
-                    card.GetComponent<CardDisplay>().InField = true;
+                    card.GetComponent<CardDisplay>().Selected = false;
                 }
             }
             else
             {
                 foreach (Transform card in transform.parent)
                 {
-                    if (card.GetComponent<CardDisplay>().InField == false)
+                    if (card.GetComponent<CardDisplay>().Selected)
                     {
+                        card.GetComponent<CardDisplay>().InField = false;
                         card.transform.SetParent(GameObject.Find("HandP2").transform, false);
                         break;
                     }
                 }
                 foreach (Transform card in transform.parent)
                 {
-                    card.GetComponent<CardDisplay>().InField = true;
+                    card.GetComponent<CardDisplay>().Selected = false;
                 }
             }
         }
-      // Invoke(nameof(CastingEffect.Pause), 1.0f);
-    }
+    } 
     void SetEffectDescription()
     {
         if (ID == Card.Effect.Upgrade)
@@ -578,12 +612,12 @@ public class CardDisplay : MonoBehaviour
         {
             if((transform.parent == GameObject.Find("MeleeZoneP1").transform || transform.parent == GameObject.Find("RangeZoneP1").transform || transform.parent == GameObject.Find("SiegeZoneP1").transform) && GameObject.Find("Player1").GetComponent<Player>().IsPlaying && GameObject.Find("Player1").GetComponent<Player>().SustituteSelected == false)
             {
-                InField = false;
+                Selected = true;
                 GameObject.Find("Player1").GetComponent<Player>().SustituteSelected = true;
             }
             else if((transform.parent == GameObject.Find("MeleeZoneP2").transform || transform.parent == GameObject.Find("RangeZoneP2").transform || transform.parent == GameObject.Find("SiegeZoneP2").transform) && GameObject.Find("Player2").GetComponent<Player>().IsPlaying && GameObject.Find("Player2").GetComponent<Player>().SustituteSelected == false)
             {
-                InField = false;
+                Selected = true;
                 GameObject.Find("Player2").GetComponent<Player>().SustituteSelected = true;
             }
 

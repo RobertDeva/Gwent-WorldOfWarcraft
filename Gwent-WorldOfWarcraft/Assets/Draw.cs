@@ -5,7 +5,7 @@ using GwentEngine;
 
 public class Draw : MonoBehaviour
 {
-    public AudioSource DrawCards;
+    public AudioSource Deal;
     public bool start = false;
     bool drawed;
     int DrawedCards = 0;
@@ -38,6 +38,7 @@ public class Draw : MonoBehaviour
     {
         if (DrawedCards < Deck.Count && CardsInHand < 10 && drawed == false)
         {
+            Deal.Play();
             GameObject card = Instantiate(Card, new Vector2(0, 0), Quaternion.identity);
             card.GetComponent<CardDisplay>().card = Deck[DrawedCards];
             card.transform.SetParent(Hand.transform, false);
@@ -51,7 +52,7 @@ public class Draw : MonoBehaviour
     public void EffectDraw()
     {
         if (DrawedCards < Deck.Count && CardsInHand < 10)
-        {
+        {   Deal.Play(); 
             GameObject card = Instantiate(Card, new Vector2(0, 0), Quaternion.identity);
             card.GetComponent<CardDisplay>().card = Deck[DrawedCards];
             card.transform.SetParent(Hand.transform, false);

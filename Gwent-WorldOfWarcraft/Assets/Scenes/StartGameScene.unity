@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 411886839}
   - component: {fileID: 411886841}
   - component: {fileID: 411886840}
+  - component: {fileID: 411886842}
   m_Layer: 5
   m_Name: BackGround
   m_TagString: Untagged
@@ -504,6 +505,102 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411886838}
   m_CullTransparentMesh: 1
+--- !u!82 &411886842
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411886838}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a049f64e2ab48e2479ffa83b5f3bce0c, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &474889944 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3861010178811035828, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
@@ -632,6 +729,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1905001135}
     - target: {fileID: 111260052445222606, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
+      propertyPath: EndRoundTrack
+      value: 
+      objectReference: {fileID: 411886842}
+    - target: {fileID: 111260052445222606, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
       propertyPath: Round1ResultsP1
       value: 
       objectReference: {fileID: 2037857199}
@@ -655,6 +756,10 @@ PrefabInstance:
       propertyPath: Round3ResultsP2
       value: 
       objectReference: {fileID: 97911297}
+    - target: {fileID: 111260052445222606, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
+      propertyPath: StartRoundTrack
+      value: 
+      objectReference: {fileID: 857368407}
     - target: {fileID: 1394588408611355099, guid: 57bbed121fe70634c8caf9cf8363aed7, type: 3}
       propertyPath: m_Name
       value: GameTracker
@@ -1030,6 +1135,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoundTracker
       objectReference: {fileID: 0}
+    - target: {fileID: 5197920639680460979, guid: 0b3070ac664f9b947abfc2843e5dccb5, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a049f64e2ab48e2479ffa83b5f3bce0c, type: 3}
+    - target: {fileID: 5197920639680460979, guid: 0b3070ac664f9b947abfc2843e5dccb5, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1038,6 +1151,11 @@ PrefabInstance:
 --- !u!224 &857368406 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2414292053395415056, guid: 0b3070ac664f9b947abfc2843e5dccb5, type: 3}
+  m_PrefabInstance: {fileID: 857368405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &857368407 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6563648807862075423, guid: 0b3070ac664f9b947abfc2843e5dccb5, type: 3}
   m_PrefabInstance: {fileID: 857368405}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &861180302
@@ -1620,6 +1738,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4834773435392180118, guid: 09273dcb13e61f04b9a901bc4bbe00d2, type: 3}
     - target: {fileID: 3636920922247870913, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+      propertyPath: Deal
+      value: 
+      objectReference: {fileID: 1990899901}
+    - target: {fileID: 3636920922247870913, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
       propertyPath: Hand
       value: 
       objectReference: {fileID: 1368531188}
@@ -1735,6 +1857,10 @@ PrefabInstance:
       propertyPath: Card
       value: 
       objectReference: {fileID: 4834773435392180118, guid: 09273dcb13e61f04b9a901bc4bbe00d2, type: 3}
+    - target: {fileID: 4763392857121627370, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+      propertyPath: Deal
+      value: 
+      objectReference: {fileID: 1501797965}
     - target: {fileID: 4763392857121627370, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
       propertyPath: Hand
       value: 
@@ -2646,6 +2772,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1692a9918be66248ab5a35e3a63250b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1501797965 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5672211860642793907, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+  m_PrefabInstance: {fileID: 911045104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1520324697
 GameObject:
   m_ObjectHideFlags: 0
@@ -3046,39 +3177,39 @@ PrefabInstance:
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[43]
       value: 
-      objectReference: {fileID: 11400000, guid: 129a965f0a6b86140820dd5f6e542704, type: 2}
+      objectReference: {fileID: 11400000, guid: c17a6cc4eced00b4a98b0761b9241e1e, type: 2}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[44]
       value: 
-      objectReference: {fileID: 11400000, guid: 129a965f0a6b86140820dd5f6e542704, type: 2}
+      objectReference: {fileID: 11400000, guid: 53569083c0cd7814a9a5575488a3cb6e, type: 2}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[45]
       value: 
-      objectReference: {fileID: 11400000, guid: 129a965f0a6b86140820dd5f6e542704, type: 2}
+      objectReference: {fileID: 11400000, guid: 53569083c0cd7814a9a5575488a3cb6e, type: 2}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[46]
       value: 
-      objectReference: {fileID: 11400000, guid: 129a965f0a6b86140820dd5f6e542704, type: 2}
+      objectReference: {fileID: 11400000, guid: 3e784800ba0e89f45a978fd63c2f8d66, type: 2}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[47]
       value: 
-      objectReference: {fileID: 11400000, guid: 129a965f0a6b86140820dd5f6e542704, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e896e5dc5cd92440b033395652467c5, type: 2}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[48]
       value: 
-      objectReference: {fileID: 11400000, guid: 129a965f0a6b86140820dd5f6e542704, type: 2}
+      objectReference: {fileID: 11400000, guid: 2d6348cced78fec45851208ea49150be, type: 2}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[49]
       value: 
-      objectReference: {fileID: 11400000, guid: 129a965f0a6b86140820dd5f6e542704, type: 2}
+      objectReference: {fileID: 11400000, guid: 9822c4bdbf9be414ab8f3968f2c17e9d, type: 2}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[50]
       value: 
-      objectReference: {fileID: 11400000, guid: 129a965f0a6b86140820dd5f6e542704, type: 2}
+      objectReference: {fileID: 11400000, guid: 3e3ab55be7e2ec444a82b1a923c29090, type: 2}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[51]
       value: 
-      objectReference: {fileID: 11400000, guid: 129a965f0a6b86140820dd5f6e542704, type: 2}
+      objectReference: {fileID: 11400000, guid: 3e3ab55be7e2ec444a82b1a923c29090, type: 2}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[52]
       value: 
@@ -3573,6 +3704,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1692a9918be66248ab5a35e3a63250b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1990899901 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4527725651276606616, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+  m_PrefabInstance: {fileID: 911045104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2007189066 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5175553679489393946, guid: 44952af2bdcb6ac449754db8be007bb7, type: 3}
@@ -3904,7 +4040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.size
-      value: 19
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[0]
@@ -3985,7 +4121,139 @@ PrefabInstance:
     - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: DeckFaction.Array.data[19]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: f7e29e083fd6d03488d99f67b68d5c7d, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[20]
+      value: 
+      objectReference: {fileID: 11400000, guid: f7e29e083fd6d03488d99f67b68d5c7d, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[21]
+      value: 
+      objectReference: {fileID: 11400000, guid: dafaaccf307bd644a80ca29d504476c7, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[22]
+      value: 
+      objectReference: {fileID: 11400000, guid: dafaaccf307bd644a80ca29d504476c7, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[23]
+      value: 
+      objectReference: {fileID: 11400000, guid: f5937b9d0d971454d9b8ce3204114046, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[24]
+      value: 
+      objectReference: {fileID: 11400000, guid: f5937b9d0d971454d9b8ce3204114046, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[25]
+      value: 
+      objectReference: {fileID: 11400000, guid: c426c2721cb9b3c45a1cf8e50fe962dd, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[26]
+      value: 
+      objectReference: {fileID: 11400000, guid: c426c2721cb9b3c45a1cf8e50fe962dd, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[27]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[28]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[29]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[30]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[31]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[32]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[33]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[34]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[35]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[36]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[37]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[38]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[39]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[40]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[41]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[42]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[43]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[44]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[45]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[46]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[47]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[48]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[49]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[50]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[51]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
+    - target: {fileID: 1508427527111072131, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
+      propertyPath: DeckFaction.Array.data[52]
+      value: 
+      objectReference: {fileID: 11400000, guid: 139314c3d211cb04e8803be0093d6165, type: 2}
     - target: {fileID: 2668779237363887079, guid: 82f0a88d9dd310943a585aaa730f106c, type: 3}
       propertyPath: m_Sprite
       value: 

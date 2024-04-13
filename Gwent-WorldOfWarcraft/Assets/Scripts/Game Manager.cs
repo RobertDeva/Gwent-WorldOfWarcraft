@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public AudioSource BattleTrack;
-    AudioSource EndRoundTrack;
-    AudioSource StartRoundTrack;
+    public AudioSource EndRoundTrack;
+    public AudioSource StartRoundTrack;
     bool P1LastWinner = false;
     bool P2LastWinner = false;
     bool Round1Playing = false;
@@ -50,17 +50,17 @@ public class GameManager : MonoBehaviour
         P1 = GameObject.Find("Player1");
         P2 = GameObject.Find("Player2");
         VictoriesP1 = 0;
-        VictoriesP2 = 0;
-        Play(); 
+        VictoriesP2 = 0; 
         P1start = true;
         P2start = false;
     }
 
     private void Update()
     {
+        Invoke(nameof(Play), 1.0f);
         Turns();
         Invoke(nameof(EndRound), 0.5f);
-        Invoke(nameof(Play), 1.0f);
+       
     }
     //This method mark the begin of a new round
     public void BeginRound()
@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
         if (P1.GetComponent<Player>().Passed && P2.GetComponent<Player>().Passed)
         {
             BattleTrack.Pause();
+            EndRoundTrack.Play();
             if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted || GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WheaterCasted)
             {
                 if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted)
@@ -320,9 +321,10 @@ public class GameManager : MonoBehaviour
         if(Round1Playing == false || (Round2Playing == false && Round1End) || (Round3Playing == false && Round2End))
         {
             BeginRound();
-            BattleTrack.Play();
+            StartRoundTrack.PlayDelayed(1.5f);
             Invoke(nameof(CheckRound), 0.7f);
-            
+            BattleTrack.PlayDelayed(5.0f);
+
         }
         
     }

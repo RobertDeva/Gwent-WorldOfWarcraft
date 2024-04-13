@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1692a9918be66248ab5a35e3a63250b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DrawCards: {fileID: -243948736671701962}
+  Deal: {fileID: -243948736671701962}
   start: 0
   CardsInHand: 10
   player: {fileID: 0}
@@ -163,7 +163,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 13e190b59a575fb43bed72574560dacf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

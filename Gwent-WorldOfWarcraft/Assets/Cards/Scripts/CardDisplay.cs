@@ -493,10 +493,7 @@ public class CardDisplay : MonoBehaviour
                         break;
                     }
                 }
-                foreach (Transform card in transform.parent)
-                {
-                    card.GetComponent<CardDisplay>().Selected = false;
-                }
+                GameObject.Find("DeckP1").GetComponent<Draw>().CardsInHand++;
             }
             else
             {
@@ -509,13 +506,12 @@ public class CardDisplay : MonoBehaviour
                         break;
                     }
                 }
-                foreach (Transform card in transform.parent)
-                {
-                    card.GetComponent<CardDisplay>().Selected = false;
-                }
+                GameObject.Find("DeckP2").GetComponent<Draw>().CardsInHand++;
             }
+
         }
     } 
+
     void SetEffectDescription()
     {
         if (ID == Card.Effect.Upgrade)
@@ -606,21 +602,19 @@ public class CardDisplay : MonoBehaviour
         }
     }
 
-    public void OnMouseDown()
+    public void OnHoverExit()
     {
-        if(InField && (transform.parent != GameObject.Find("HandP1").transform || transform.parent != GameObject.Find("HandP2").transform))
+        if (transform.parent != GameObject.Find("HandP1").transform || transform.parent != GameObject.Find("HandP2").transform)
         {
-            if((transform.parent == GameObject.Find("MeleeZoneP1").transform || transform.parent == GameObject.Find("RangeZoneP1").transform || transform.parent == GameObject.Find("SiegeZoneP1").transform) && GameObject.Find("Player1").GetComponent<Player>().IsPlaying && GameObject.Find("Player1").GetComponent<Player>().SustituteSelected == false)
-            {
-                Selected = true;
-                GameObject.Find("Player1").GetComponent<Player>().SustituteSelected = true;
-            }
-            else if((transform.parent == GameObject.Find("MeleeZoneP2").transform || transform.parent == GameObject.Find("RangeZoneP2").transform || transform.parent == GameObject.Find("SiegeZoneP2").transform) && GameObject.Find("Player2").GetComponent<Player>().IsPlaying && GameObject.Find("Player2").GetComponent<Player>().SustituteSelected == false)
-            {
-                Selected = true;
-                GameObject.Find("Player2").GetComponent<Player>().SustituteSelected = true;
-            }
+            Selected = false;
+        }
+    }
 
+    public void OnClick()
+    {
+        if(transform.parent != GameObject.Find("HandP1").transform || transform.parent != GameObject.Find("HandP2").transform)
+        {
+            Selected = true;
         }
     }
 }

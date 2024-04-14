@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d841110d5806243b3ee0f60516555c, type: 3}
+  m_Name: Varian
+  m_EditorClassIdentifier: 
+  CardName: Varian Wrynn
+  Attack: 9
+  CardFaction: 1
+  Cardtipe: 4
+  Position1: 0
+  Position2: 0
+  Position3: 0
+  CardRank: 1
+  ID: 4
+  Description: Varian Wrynn era el Rey de Ventormenta y Gran Rey de la Gran Alianza
+  Positions: M
+  CardFront: {fileID: 21300000, guid: d743a933e7bf23648a2a0205437d28a7, type: 3}

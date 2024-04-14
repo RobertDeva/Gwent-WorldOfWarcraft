@@ -23,4 +23,4 @@ MonoBehaviour:
   ID: 1
   Description: Portal a otro mundo donde espera un campo de batalla sangriento
   Positions: W
-  CardFront: {fileID: 0}
+  CardFront: {fileID: 21300000, guid: e55efcca4ce7a184ab58fde9f6ebd653, type: 3}

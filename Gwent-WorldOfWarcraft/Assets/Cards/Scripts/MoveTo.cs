@@ -98,9 +98,46 @@ public class MoveTo: MonoBehaviour
                 transform.GetComponent<CardDisplay>().CastEffect();
             }
         }
+        else if(((startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false) || (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)) && a == Card.CardTipe.Lure)
+        {
+            int CardInZoneP1 = 0;
+            int CardInZoneP2 = 0;
+            foreach (Transform card in MeleeP1.transform)
+            {
+                CardDisplay rb = card.GetComponent<CardDisplay>();
+                if (rb != null)
+                {
+                    CardInZoneP1++;
+                }
+            }
+            foreach (Transform card in MeleeP2.transform)
+            {
+                CardDisplay rb = card.GetComponent<CardDisplay>();
+                if (rb != null)
+                {
+                    CardInZoneP2++;
+                }
+            }
+            if (startParent == HandP1.transform && CardInZoneP1 > 0)
+            {
+                transform.SetParent(MeleeP1.transform, false);
+                GetComponent<CardDisplay>().InField = true;
+                P1.GetComponent<Player>().Played = true;
+                DeckP1.GetComponent<Draw>().CardsInHand--;
+                transform.GetComponent<CardDisplay>().CastEffect();
+            }
+            else if (startParent == HandP2.transform && CardInZoneP2 > 0)
+            {
+                transform.SetParent(MeleeP2.transform, false);
+                GetComponent<CardDisplay>().InField = true;
+                P2.GetComponent<Player>().Played = true;
+                DeckP2.GetComponent<Draw>().CardsInHand--;
+                transform.GetComponent<CardDisplay>().CastEffect();
+            }
+        }
         else if(startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false)
         {
-            if ((a == Card.CardTipe.Unit && (x == Card.Position.M || y == Card.Position.M || z == Card.Position.M)) || a == Card.CardTipe.Lure || a == Card.CardTipe.ClearWeather)
+            if ((a == Card.CardTipe.Unit && (x == Card.Position.M || y == Card.Position.M || z == Card.Position.M)) || a == Card.CardTipe.ClearWeather)
             {
                 transform.SetParent(MeleeP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
@@ -119,7 +156,7 @@ public class MoveTo: MonoBehaviour
         }
         else if(startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)
         {
-            if ((a == Card.CardTipe.Unit && (x == Card.Position.M || y == Card.Position.M || z == Card.Position.M)) || a == Card.CardTipe.Lure || a == Card.CardTipe.ClearWeather)
+            if ((a == Card.CardTipe.Unit && (x == Card.Position.M || y == Card.Position.M || z == Card.Position.M)) || a == Card.CardTipe.ClearWeather)
             {
                 transform.SetParent(MeleeP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
@@ -179,7 +216,7 @@ public class MoveTo: MonoBehaviour
         }
         else if (startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false)
         {
-            if ((a == Card.CardTipe.Unit && (x == Card.Position.R || y == Card.Position.R || z == Card.Position.R)) || a == Card.CardTipe.Lure || a == Card.CardTipe.ClearWeather)
+            if ((a == Card.CardTipe.Unit && (x == Card.Position.R || y == Card.Position.R || z == Card.Position.R)) || a == Card.CardTipe.ClearWeather)
             {
                 transform.SetParent(RangeP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
@@ -197,9 +234,46 @@ public class MoveTo: MonoBehaviour
             }
             
         }
+        else if (((startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false) || (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)) && a == Card.CardTipe.Lure)
+        {
+            int CardInZoneP1 = 0;
+            int CardInZoneP2 = 0;   
+            foreach (Transform card in RangeP1.transform)
+            {
+                CardDisplay rb = card.GetComponent<CardDisplay>();
+                if (rb != null)
+                {
+                    CardInZoneP1++;
+                }
+            }
+            foreach (Transform card in RangeP2.transform)
+            {
+                CardDisplay rb = card.GetComponent<CardDisplay>();
+                if (rb != null)
+                {
+                    CardInZoneP2++;
+                }
+            }
+            if (startParent == HandP1.transform && CardInZoneP1 > 0)
+            {
+                transform.SetParent(RangeP1.transform, false);
+                GetComponent<CardDisplay>().InField = true;
+                P1.GetComponent<Player>().Played = true;
+                DeckP1.GetComponent<Draw>().CardsInHand--;
+                transform.GetComponent<CardDisplay>().CastEffect();
+            }
+            else if (startParent == HandP2.transform && CardInZoneP2 > 0)
+            {
+                transform.SetParent(RangeP2.transform, false);
+                GetComponent<CardDisplay>().InField = true;
+                P2.GetComponent<Player>().Played = true;
+                DeckP2.GetComponent<Draw>().CardsInHand--;
+                transform.GetComponent<CardDisplay>().CastEffect();
+            }           
+        }
         else if (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)
         {
-            if ((a == Card.CardTipe.Unit && (x == Card.Position.R || y == Card.Position.R || z == Card.Position.R)) || a == Card.CardTipe.Lure || a == Card.CardTipe.ClearWeather)
+            if ((a == Card.CardTipe.Unit && (x == Card.Position.R || y == Card.Position.R || z == Card.Position.R)) || a == Card.CardTipe.ClearWeather)
             {
                 transform.SetParent(RangeP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
@@ -257,9 +331,43 @@ public class MoveTo: MonoBehaviour
                 transform.GetComponent<CardDisplay>().CastEffect();
             }
         }
+        int CardInZoneP1 = 0;
+        int CardInZoneP2 = 0;
+        foreach (Transform card in SiegeP1.transform)
+        {
+            CardDisplay rb = card.GetComponent<CardDisplay>();
+            if (rb != null)
+            {
+                CardInZoneP1++;
+            }
+        }
+        foreach (Transform card in SiegeP2.transform)
+        {
+            CardDisplay rb = card.GetComponent<CardDisplay>();
+            if (rb != null)
+            {
+                CardInZoneP2++;
+            }
+        }
+        if (startParent == HandP1.transform && CardInZoneP1 > 0)
+        {
+            transform.SetParent(SiegeP1.transform, false);
+            GetComponent<CardDisplay>().InField = true;
+            P1.GetComponent<Player>().Played = true;
+            DeckP1.GetComponent<Draw>().CardsInHand--;
+            transform.GetComponent<CardDisplay>().CastEffect();
+        }
+        else if (startParent == HandP2.transform && CardInZoneP2 > 0)
+        {
+            transform.SetParent(SiegeP2.transform, false);
+            GetComponent<CardDisplay>().InField = true;
+            P2.GetComponent<Player>().Played = true;
+            DeckP2.GetComponent<Draw>().CardsInHand--;
+            transform.GetComponent<CardDisplay>().CastEffect();
+        }
         else if (startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false)
         {
-            if ((a == Card.CardTipe.Unit && (x == Card.Position.S || y == Card.Position.S || z == Card.Position.S)) || a == Card.CardTipe.Lure || a == Card.CardTipe.ClearWeather)
+            if ((a == Card.CardTipe.Unit && (x == Card.Position.S || y == Card.Position.S || z == Card.Position.S)) || a == Card.CardTipe.ClearWeather)
             {
                 transform.SetParent(SiegeP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
@@ -279,7 +387,7 @@ public class MoveTo: MonoBehaviour
         }
         else if (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)
         {
-            if ((a == Card.CardTipe.Unit && (x == Card.Position.S || y == Card.Position.S || z == Card.Position.S)) || a == Card.CardTipe.Lure || a == Card.CardTipe.ClearWeather)
+            if ((a == Card.CardTipe.Unit && (x == Card.Position.S || y == Card.Position.S || z == Card.Position.S)) || a == Card.CardTipe.ClearWeather)
             {
                 transform.SetParent(SiegeP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;

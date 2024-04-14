@@ -18,9 +18,7 @@ MonoBehaviour:
   Position1: 1
   Position2: 1
   Position3: 2
-  CardRank: 0
   ID: 1
-  Description: Un poderoso mago que fue aprendiz del Antiguo Protector de Azeroth
-    Medith
+  Description: Un poderoso mago que fue aprendiz del ultimo guardian Medivh
   Positions: R S
   CardFront: {fileID: 21300000, guid: f54017bee14d7f840a62caa795e6f3fe, type: 3}

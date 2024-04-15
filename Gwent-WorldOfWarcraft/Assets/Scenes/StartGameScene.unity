@@ -1529,6 +1529,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8037e0fb04c30db428942e0d5e6e6e5f, type: 3}
+    - target: {fileID: 1618880746457660847, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+      propertyPath: m_Constraint
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618880746457660847, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2270183485931265095, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
       propertyPath: m_Spacing.x
       value: 0.5
@@ -1591,7 +1599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717699733321935581, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1150
+      value: -1120
       objectReference: {fileID: 0}
     - target: {fileID: 2717699733321935581, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2088,6 +2096,14 @@ PrefabInstance:
     - target: {fileID: 7189751866310306042, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317271039571108407, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+      propertyPath: m_Constraint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317271039571108407, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7533370215587408175, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
       propertyPath: m_LocalRotation.w

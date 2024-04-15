@@ -9,7 +9,7 @@ public class CardDisplay : MonoBehaviour
 {
     GameObject ZoomCardP1;
     GameObject ZoomCardP2;
-    public AudioSource CastingEffect;
+   
     public Card card;
 
     public TMP_Text CardName;
@@ -31,6 +31,8 @@ public class CardDisplay : MonoBehaviour
     public string Description;
     public string EffectDescription;
 
+
+    public AudioSource CastingEffect;
     // Start is called before the first frame update
     void Start()
     {

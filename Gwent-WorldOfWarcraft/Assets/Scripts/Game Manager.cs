@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
                 {
                    card.gameObject.SetActive(true);
                 }
+                P1Turn = true;
             }
             if(P1Turn || P1start || P2.GetComponent<Player>().Passed)
             {
@@ -123,10 +124,11 @@ public class GameManager : MonoBehaviour
                 {
                     card.gameObject.SetActive(true);
                 }
+                P2Turn = true;
             }
             if (P2Turn || P2start || P1.GetComponent<Player>().Passed)
             {
-                P1Turn = true;
+                P2Turn = true;
                 P1.GetComponent<Player>().Drawed = false;
                 foreach (Transform card in GameObject.Find("HandP2").transform)
                 {
@@ -428,49 +430,41 @@ public class GameManager : MonoBehaviour
 
         foreach(Transform card in MeleeP1.transform)
         {
-           card.gameObject.SetActive(false);
-           card.SetParent(CementeryP1.transform, false);
+            card.gameObject.SetActive(false);
         }
         foreach (Transform card in MeleeP2.transform)
         {
             card.gameObject.SetActive(false);
-            card.SetParent(CementeryP2.transform, false);
         }
         foreach (Transform card in RangeP1.transform)
         {
             card.gameObject.SetActive(false);
-            card.SetParent(CementeryP1.transform, false);
         }
         foreach (Transform card in RangeP2.transform)
         {
             card.gameObject.SetActive(false);
-            card.SetParent(CementeryP2.transform, false);
         }
         foreach (Transform card in SiegeP1.transform)
         {
             card.gameObject.SetActive(false);
-            card.SetParent(CementeryP1.transform, false);
         }
         foreach (Transform card in SiegeP2.transform)
         {
             card.gameObject.SetActive(false);
-            card.SetParent(CementeryP2.transform, false);
         }
         foreach (Transform card in MeleeWeather.transform)
         {
             card.gameObject.SetActive(false);
-            card.SetParent(CementeryP1.transform, false);
         }
         foreach (Transform card in RangeWeather.transform)
         {
             card.gameObject.SetActive(false);
-            card.SetParent(CementeryP1.transform, false);
         }
         foreach (Transform card in SiegeWeather.transform)
         {
             card.gameObject.SetActive(false);
-            card.SetParent(CementeryP1.transform, false);
         }
+       
     }
 
    

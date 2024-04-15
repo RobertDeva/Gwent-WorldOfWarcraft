@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         foreach(Transform card in LineZone.transform)
         {
             CardDisplay carta = card.GetComponent<CardDisplay>();
-            if(carta != null)
+            if(carta != null && card.gameObject.activeInHierarchy == true)
             {
                 list.Add(carta);
             }
@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
    
     void Update()
     {
-        if(IsPlaying == false || Played == true && Passed == false)
+        if(IsPlaying == false || Passed == false)
         {
             GetLinePower(MeleeZone);
             GetLinePower(RangeZone);

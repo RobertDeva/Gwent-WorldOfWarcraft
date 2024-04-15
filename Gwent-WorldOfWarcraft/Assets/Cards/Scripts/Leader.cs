@@ -20,7 +20,6 @@ namespace GwentEngine
 
         public enum Effect
         {
-            SaveCard,
             Upgrade,
             Weather
         }

@@ -56,7 +56,7 @@ public class LeaderCardDisplay : MonoBehaviour
     // This method cast Leader effect
     public void LeaderEffect()
     {
-        if (Player.GetComponent<Player>().Played)
+        if (Player.GetComponent<Player>().Played == false)
         {
             if ((!EffectCasted1time || !EffectCasted2time || !EffectCasted3time))
             {
@@ -86,70 +86,6 @@ public class LeaderCardDisplay : MonoBehaviour
                             }
                         }
                     }
-                    if (ID == Leader.Effect.SaveCard)
-                    {
-                        System.Random rand = new();
-                        int count = 0;
-                        int index;
-
-                        foreach (Transform card in GameObject.Find("MeleeZoneP1").transform)
-                        {
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
-                        {
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        foreach (Transform card in GameObject.Find("SiegeZoneP1").transform)
-                        {
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        index = rand.Next(0, count);
-                        count = 0;
-                        foreach (Transform card in GameObject.Find("MeleeZoneP1").transform)
-                        {
-                            if (count >= index)
-                            {
-                                if (count == index)
-                                    card.GetComponent<CardDisplay>().BondInField = true;
-                                break;
-                            }
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
-                        {
-                            if (count >= index)
-                            {
-                                if (count == index)
-                                    card.GetComponent<CardDisplay>().BondInField = true;
-                                break;
-                            }
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        foreach (Transform card in GameObject.Find("SiegeZoneP1").transform)
-                        {
-                            if (count >= index)
-                            {
-                                if (count == index)
-                                    card.GetComponent<CardDisplay>().BondInField = true;
-                                break;
-                            }
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                    }
-
                 }
                 else if (transform.parent == GameObject.Find("LeaderZone2").transform)
                 {
@@ -177,70 +113,6 @@ public class LeaderCardDisplay : MonoBehaviour
                             }
                         }
                     }
-                    if (ID == Leader.Effect.SaveCard)
-                    {
-                        System.Random rand = new();
-                        int count = 0;
-                        int index;
-
-                        foreach (Transform card in GameObject.Find("MeleeZoneP2").transform)
-                        {
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
-                        {
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        foreach (Transform card in GameObject.Find("SiegeZoneP2").transform)
-                        {
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        index = rand.Next(0, count);
-                        count = 0;
-                        foreach (Transform card in GameObject.Find("MeleeZoneP2").transform)
-                        {
-                            if (count >= index)
-                            {
-                                if (count == index)
-                                    card.GetComponent<CardDisplay>().BondInField = true;
-                                break;
-                            }
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
-                        {
-                            if (count >= index)
-                            {
-                                if (count == index)
-                                    card.GetComponent<CardDisplay>().BondInField = true;
-                                break;
-                            }
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                        foreach (Transform card in GameObject.Find("SiegeZoneP2").transform)
-                        {
-                            if (count >= index)
-                            {
-                                if (count == index)
-                                    card.GetComponent<CardDisplay>().BondInField = true;
-                                break;
-                            }
-                            CardDisplay rb = card.GetComponent<CardDisplay>();
-                            if (rb != null)
-                                count++;
-                        }
-                    }
-
                 }
 
                 if (EffectCasted1time == false)

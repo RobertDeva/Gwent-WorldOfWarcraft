@@ -61,12 +61,19 @@ public class CardDisplay : MonoBehaviour
         ArtWork.sprite = card.CardFront;
         Positions.text = card.Positions;
     }
+    void Update()
+    {
+        if((transform.parent != GameObject.Find("HandP1") || transform.parent != GameObject.Find("HandP2")) && Cardtipe == Card.CardTipe.Weather)
+        {
+            CastEffect();
+        }
+    }
+
     public bool InField = false;
     public bool Upgraded = false;
     public bool AffectedByWeather = false;
     public bool Buffed = false;
     public bool Debuffed = false;
-    public bool BondInField = false;
     public bool Selected = false;
 
     //This method cast Card effect
@@ -77,7 +84,8 @@ public class CardDisplay : MonoBehaviour
 
     void Effect()
     {
-
+        GameObject HandP1 = GameObject.Find("HandP1");
+        GameObject HandP2 = GameObject.Find("HandP2");
         GameObject MeleeP1 = GameObject.Find("MeleeZoneP1");
         GameObject MeleeP2 = GameObject.Find("MeleeZoneP2");
         GameObject RangeP1 = GameObject.Find("RangeZoneP1");
@@ -482,33 +490,33 @@ public class CardDisplay : MonoBehaviour
         }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.Lure && Cardtipe == Card.CardTipe.Lure)
         {
-            if (transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || SiegeP1.transform)
+            
+            if(transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform)
             {
                 foreach (Transform card in transform.parent)
                 {
                     if (card.GetComponent<CardDisplay>().Selected)
                     {
                         card.GetComponent<CardDisplay>().InField = false;
-                        card.transform.SetParent(GameObject.Find("HandP1").transform, false);
-                        break;
-                    }
-                }
-                GameObject.Find("DeckP1").GetComponent<Draw>().CardsInHand++;
-            }
-            else
-            {
-                foreach (Transform card in transform.parent)
-                {
-                    if (card.GetComponent<CardDisplay>().Selected)
-                    {
-                        card.GetComponent<CardDisplay>().InField = false;
-                        card.transform.SetParent(GameObject.Find("HandP2").transform, false);
+                        card.transform.SetParent(HandP2.transform, false);
                         break;
                     }
                 }
                 GameObject.Find("DeckP2").GetComponent<Draw>().CardsInHand++;
             }
-
+            else if (transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || SiegeP1.transform)
+            {
+                foreach (Transform card in transform.parent)
+                {
+                    if (card.GetComponent<CardDisplay>().Selected)
+                    {
+                        card.GetComponent<CardDisplay>().InField = false;
+                        card.transform.SetParent(HandP1.transform, false);
+                        break;
+                    }
+                }
+                GameObject.Find("DeckP1").GetComponent<Draw>().CardsInHand++;
+            }
         }
     } 
 
@@ -520,7 +528,7 @@ public class CardDisplay : MonoBehaviour
         }
         else if (ID == Card.Effect.Weather)
         {
-            EffectDescription = "Reduce el ataque de las Unidades de una fila a 2";
+            EffectDescription = "Reduce el ataque de las Unidades de una fila a 1";
         }
         else if (ID == Card.Effect.Lure)
         {

@@ -92,7 +92,13 @@ public class GameManager : MonoBehaviour
     {
         if (P1.GetComponent<Player>().Passed == false && P2.GetComponent<Player>().Passed == false)
         { 
-            
+            if(P2.GetComponent<Player>().Passed)
+            {
+                foreach (Transform card in GameObject.Find("HandP1").transform)
+                {
+                   card.gameObject.SetActive(true);
+                }
+            }
             if(P1Turn || P1start || P2.GetComponent<Player>().Passed)
             {
                 P1Turn = true;
@@ -111,7 +117,13 @@ public class GameManager : MonoBehaviour
                      P1.GetComponent<Player>().IsPlaying = true;
                 P1start = false;
             }
-            
+            if (P1.GetComponent<Player>().Passed)
+            {
+                foreach (Transform card in GameObject.Find("HandP2").transform)
+                {
+                    card.gameObject.SetActive(true);
+                }
+            }
             if (P2Turn || P2start || P1.GetComponent<Player>().Passed)
             {
                 P1Turn = true;
@@ -321,9 +333,9 @@ public class GameManager : MonoBehaviour
         if(Round1Playing == false || (Round2Playing == false && Round1End) || (Round3Playing == false && Round2End))
         {
             BeginRound();
-            StartRoundTrack.PlayDelayed(1.5f);
+            StartRoundTrack.PlayDelayed(1.0f);
             Invoke(nameof(CheckRound), 0.7f);
-            BattleTrack.PlayDelayed(5.0f);
+            BattleTrack.PlayDelayed(4.0f);
 
         }
         
@@ -422,51 +434,33 @@ public class GameManager : MonoBehaviour
 
         foreach(Transform card in MeleeP1.transform)
         {
-            if(card.GetComponent<CardDisplay>().BondInField == false)
-            {
-                card.SetParent(CementeryP1.transform);
-                card.gameObject.SetActive(false);
-            }
+            card.SetParent(CementeryP1.transform);
+            card.gameObject.SetActive(false);
         }
         foreach (Transform card in MeleeP2.transform)
         {
-            if (card.GetComponent<CardDisplay>().BondInField == false)
-            {
-                card.SetParent(CementeryP2.transform);
-                card.gameObject.SetActive(false);
-            }
+            card.SetParent(CementeryP2.transform);
+            card.gameObject.SetActive(false);
         }
         foreach (Transform card in RangeP1.transform)
         {
-            if (card.GetComponent<CardDisplay>().BondInField == false)
-            {
-                card.SetParent(CementeryP1.transform);
-                card.gameObject.SetActive(false);
-            }
+            card.SetParent(CementeryP1.transform);
+            card.gameObject.SetActive(false);
         }
         foreach (Transform card in RangeP2.transform)
         {
-            if (card.GetComponent<CardDisplay>().BondInField == false)
-            {
-                card.SetParent(CementeryP2.transform);
-                card.gameObject.SetActive(false);
-            }
+            card.SetParent(CementeryP2.transform);
+            card.gameObject.SetActive(false);
         }
         foreach (Transform card in SiegeP1.transform)
         {
-            if (card.GetComponent<CardDisplay>().BondInField == false)
-            {
-                card.SetParent(CementeryP1.transform);
-                card.gameObject.SetActive(false);
-            }
+            card.SetParent(CementeryP1.transform);
+            card.gameObject.SetActive(false);
         }
         foreach (Transform card in SiegeP2.transform)
         {
-            if (card.GetComponent<CardDisplay>().BondInField == false)
-            {
-                card.SetParent(CementeryP2.transform);
-                card.gameObject.SetActive(false);
-            }
+            card.SetParent(CementeryP2.transform);
+            card.gameObject.SetActive(false);
         }
         foreach (Transform card in MeleeUpP1.transform)
         {

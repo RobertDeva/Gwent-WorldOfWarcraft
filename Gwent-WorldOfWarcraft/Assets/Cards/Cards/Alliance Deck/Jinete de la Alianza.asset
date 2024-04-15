@@ -21,6 +21,6 @@ MonoBehaviour:
   Position3: 0
   CardRank: 2
   ID: 8
-  Description: balleros de la Alianza
+  Description: Jinete perteneciente a la orden de caballeros de la Alianza
   Positions: M S
   CardFront: {fileID: 21300000, guid: baf7230fdd74ba244a803e93621888c0, type: 3}

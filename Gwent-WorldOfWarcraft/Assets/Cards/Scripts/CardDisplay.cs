@@ -185,6 +185,16 @@ public class CardDisplay : MonoBehaviour
                     card.GetComponent<CardDisplay>().Upgraded = true;
                 }
             }
+            if (transform.parent == MeleeUpP1.transform || transform.parent == RangeUpP1.transform || transform.parent == SiegeP1.transform)
+            {
+                transform.SetParent(GameObject.Find("CementeryP1").transform, false);
+                transform.gameObject.SetActive(false);
+            }
+            else
+            {
+                transform.SetParent(GameObject.Find("CementeryP2").transform, false);
+                transform.gameObject.SetActive(false);
+            }
         }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.ClearWeather && Cardtipe == Card.CardTipe.ClearWeather)
         {

@@ -422,90 +422,54 @@ public class GameManager : MonoBehaviour
         GameObject RangeP2 = GameObject.Find("RangeZoneP2");
         GameObject SiegeP1 = GameObject.Find("SiegeZoneP1");
         GameObject SiegeP2 = GameObject.Find("SiegeZoneP2");
-        GameObject MeleeUpP1 = GameObject.Find("MeleeZoneUpP1");
-        GameObject MeleeUpP2 = GameObject.Find("MeleeZoneUpP2");
-        GameObject RangeUpP1 = GameObject.Find("RangeZoneUpP1");
-        GameObject RangeUpP2 = GameObject.Find("RangeZoneUpP2");
-        GameObject SiegeUpP1 = GameObject.Find("SiegeZoneUpP1");
-        GameObject SiegeUpP2 = GameObject.Find("SiegeZoneUpP2");
-        GameObject MeleeWheather = GameObject.Find("MeleeZoneClima");
-        GameObject RangeWheather = GameObject.Find("RangeZoneClima");
-        GameObject SiegeWheather = GameObject.Find("SiegeZoneClima");
+        GameObject MeleeWeather = GameObject.Find("MeleeZoneClima");
+        GameObject RangeWeather = GameObject.Find("RangeZoneClima");
+        GameObject SiegeWeather = GameObject.Find("SiegeZoneClima");
 
         foreach(Transform card in MeleeP1.transform)
         {
-            card.SetParent(CementeryP1.transform);
-            card.gameObject.SetActive(false);
+           card.gameObject.SetActive(false);
+           card.SetParent(CementeryP1.transform, false);
         }
         foreach (Transform card in MeleeP2.transform)
         {
-            card.SetParent(CementeryP2.transform);
             card.gameObject.SetActive(false);
+            card.SetParent(CementeryP2.transform, false);
         }
         foreach (Transform card in RangeP1.transform)
         {
-            card.SetParent(CementeryP1.transform);
             card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
         }
         foreach (Transform card in RangeP2.transform)
         {
-            card.SetParent(CementeryP2.transform);
             card.gameObject.SetActive(false);
+            card.SetParent(CementeryP2.transform, false);
         }
         foreach (Transform card in SiegeP1.transform)
         {
-            card.SetParent(CementeryP1.transform);
             card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
         }
         foreach (Transform card in SiegeP2.transform)
         {
-            card.SetParent(CementeryP2.transform);
             card.gameObject.SetActive(false);
+            card.SetParent(CementeryP2.transform, false);
         }
-        foreach (Transform card in MeleeUpP1.transform)
+        foreach (Transform card in MeleeWeather.transform)
         {
-            card.SetParent(CementeryP1.transform);
             card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
         }
-        foreach (Transform card in MeleeUpP2.transform)
+        foreach (Transform card in RangeWeather.transform)
         {
-            card.SetParent(CementeryP2.transform);
-            card.gameObject.SetActive(false);     
-        }
-        foreach (Transform card in RangeUpP1.transform)
-        {
-             card.SetParent(CementeryP1.transform);
-             card.gameObject.SetActive(false);
-        }
-        foreach (Transform card in RangeUpP2.transform)
-        {
-             card.SetParent(CementeryP2.transform);
-             card.gameObject.SetActive(false);
-        }
-        foreach (Transform card in SiegeUpP1.transform)
-        {
-            card.SetParent(CementeryP1.transform);
             card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
         }
-        foreach (Transform card in SiegeUpP2.transform)
+        foreach (Transform card in SiegeWeather.transform)
         {
-            card.SetParent(CementeryP2.transform);
             card.gameObject.SetActive(false);
-        }
-        foreach (Transform card in MeleeWheather.transform)
-        {
-            card.SetParent(CementeryP1.transform);
-            card.gameObject.SetActive(false);
-        }
-        foreach (Transform card in RangeWheather.transform)
-        {
-            card.SetParent(CementeryP1.transform);
-            card.gameObject.SetActive(false);
-        } 
-        foreach(Transform card in SiegeWheather.transform)
-        {
-            card.SetParent(CementeryP1.transform);
-            card.gameObject.SetActive(false);       
+            card.SetParent(CementeryP1.transform, false);
         }
     }
 

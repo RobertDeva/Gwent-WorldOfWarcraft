@@ -19,7 +19,6 @@ public class Draw : MonoBehaviour
     
     void Start()
     {
-        drawed = player.GetComponent<Player>().Drawed;
         Deck = Player.Shuffle(player.GetComponent<Player>().Cards);
         CardsInHand = 0;
         CementeryP1 = GameObject.Find("CementeryP1");
@@ -35,6 +34,7 @@ public class Draw : MonoBehaviour
                 start = true;
             }
         }
+        drawed = player.GetComponent<Player>().Drawed;
     }
 
     //This method deal a card to player hand

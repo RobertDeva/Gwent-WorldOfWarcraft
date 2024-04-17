@@ -1769,6 +1769,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 682816746}
+    - target: {fileID: 3636920922247870913, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+      propertyPath: CardsInHand
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3954364176794448475, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1889,6 +1893,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1115697188}
+    - target: {fileID: 4763392857121627370, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
+      propertyPath: CardsInHand
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4875595997436419122, guid: ef7c420ea1f041c47bbe95c0e47984f6, type: 3}
       propertyPath: m_StartAxis
       value: 0

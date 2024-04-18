@@ -251,7 +251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c967ad2c57126459ba3be14865142b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CastingEffect: {fileID: 4237599247572559916}
   card: {fileID: 0}
   CardName: {fileID: 7104930045704505375}
   CardDescription: {fileID: 4232917091686677225}
@@ -270,12 +269,12 @@ MonoBehaviour:
   CardRank: 0
   Description: 
   EffectDescription: 
+  CastingEffect: {fileID: 4237599247572559916}
   InField: 0
   Upgraded: 0
   AffectedByWeather: 0
   Buffed: 0
   Debuffed: 0
-  BondInField: 0
   Selected: 0
 --- !u!114 &-1290849901961665873
 MonoBehaviour:
@@ -289,9 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb71aa974597e98419443dfb9bfa6ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheaterSet: {fileID: 0}
-  UnitSet: {fileID: 0}
-  UpgadeSet: {fileID: 0}
 --- !u!114 &7258360537082061208
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class Draw : MonoBehaviour
     public bool start = false;
     bool drawed;
     int DrawedCards = 0;
-    public int CardsInHand;
+    public int CardsInHand = 0;
     public GameObject player;
     public GameObject Card;
     public GameObject Hand;
@@ -20,7 +20,6 @@ public class Draw : MonoBehaviour
     void Start()
     {
         Deck = Player.Shuffle(player.GetComponent<Player>().Cards);
-        CardsInHand = 0;
         CementeryP1 = GameObject.Find("CementeryP1");
         CementeryP2 = GameObject.Find("CementeryP2");
     }
@@ -28,11 +27,10 @@ public class Draw : MonoBehaviour
     {
         if (!start)
         {
-            Invoke(nameof(EffectDraw), 1.5f);
-            if (CardsInHand == 10)
-            {
+            if (CardsInHand < 10)
+                EffectDraw();
+            else
                 start = true;
-            }
         }
         drawed = player.GetComponent<Player>().Drawed;
     }

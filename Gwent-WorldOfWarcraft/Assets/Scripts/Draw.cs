@@ -84,7 +84,7 @@ public class Draw : MonoBehaviour
     //This method deal cards to player hand at begin of  a new round or by card effect
     public void EffectDraw()
     {
-        if (DrawedCards < Deck.Count && CardsInHand == 10 && (transform.parent == GameObject.Find("DeckZone1").transform || transform.parent == GameObject.Find("DeckZone2")))
+        if (DrawedCards < Deck.Count && CardsInHand >= 10)
         {
             if (transform.parent == GameObject.Find("DeckZone1").transform)
             {
@@ -103,7 +103,7 @@ public class Draw : MonoBehaviour
                 card.SetActive(false);
             }
         }
-        if (DrawedCards < Deck.Count && CardsInHand < 10)
+        else if (DrawedCards < Deck.Count && CardsInHand < 10)
         {
             Deal.Play();
             GameObject card;

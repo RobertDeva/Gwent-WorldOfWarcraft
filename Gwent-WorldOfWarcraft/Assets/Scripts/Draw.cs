@@ -6,6 +6,7 @@ using GwentEngine;
 public class Draw : MonoBehaviour
 {
     public AudioSource Deal;
+    bool firsttime = true;
     public bool start = false;
     bool drawed;
     int DrawedCards = 0;
@@ -18,16 +19,17 @@ public class Draw : MonoBehaviour
     GameObject CementeryP2;
     public List<Card> Deck;
     public List<Card> ShuffleDeck;
-    void Start()
-    {
-        Deck = Player.Shuffle(player.GetComponent<Player>().Cards);
-        CementeryP1 = GameObject.Find("CementeryP1");
-        CementeryP2 = GameObject.Find("CementeryP2");
-    }
     private void Update()
     {
         if (!start)
         {
+            if (firsttime)
+            {
+                Deck = Player.Shuffle(player.GetComponent<Player>().Cards);
+                CementeryP1 = GameObject.Find("CementeryP1");
+                CementeryP2 = GameObject.Find("CementeryP2");
+                firsttime = false;
+            }
             if (CardsInHand < 10)
                 EffectDraw();
             else

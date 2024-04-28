@@ -354,7 +354,7 @@ public class CardDisplay : MonoBehaviour
                 }
             }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.DestroyCard && Cardtipe == Card.CardTipe.Unit)
-            {
+        {
                 if (transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform)
                 {
                     System.Random rand = new();
@@ -389,12 +389,10 @@ public class CardDisplay : MonoBehaviour
                             {
                                 card.SetParent(GameObject.Find("CementeryP2").transform, false);
                                 card.gameObject.SetActive(false);
+                                count++;
                             }
                             break;
                         }
-                        CardDisplay rb = card.GetComponent<CardDisplay>();
-                        if (rb != null)
-                            count++;
                     }
                     foreach (Transform card in RangeP2.transform)
                     {
@@ -404,12 +402,10 @@ public class CardDisplay : MonoBehaviour
                             {
                                 card.SetParent(GameObject.Find("CementeryP2").transform, false);
                                 card.gameObject.SetActive(false);
+                                count++;
                             }
                             break;
                         }
-                        CardDisplay rb = card.GetComponent<CardDisplay>();
-                        if (rb != null)
-                            count++;
                     }
                     foreach (Transform card in SiegeP2.transform)
                     {
@@ -419,19 +415,17 @@ public class CardDisplay : MonoBehaviour
                             {
                                 card.SetParent(GameObject.Find("CementeryP2").transform, false);
                                 card.gameObject.SetActive(false);
+                                count++;
                             }
                             break;
                         }
-                        CardDisplay rb = card.GetComponent<CardDisplay>();
-                        if (rb != null)
-                            count++;
                     }
                 }
                 else
                 {
                     System.Random rand = new();
                     int count = 0;
-                    int index = 0;
+                    int index;
 
                     foreach (Transform card in MeleeP1.transform)
                     {
@@ -499,7 +493,7 @@ public class CardDisplay : MonoBehaviour
                             count++;
                     }
                 }
-            }
+        }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.DrawCard && Cardtipe == Card.CardTipe.Unit)
             {
                 GameObject.Find("DeckP1").GetComponent<Draw>().EffectDraw();

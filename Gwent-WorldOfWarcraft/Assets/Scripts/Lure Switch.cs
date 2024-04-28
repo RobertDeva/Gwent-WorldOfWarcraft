@@ -28,7 +28,6 @@ public class LureSwitch : MonoBehaviour
         SiegeP2 = GameObject.Find("SiegeZoneP2");
         Player1 = GameObject.Find("Player1");
         Player2 = GameObject.Find("Player2");
-
     }
 
     public void OnClick()

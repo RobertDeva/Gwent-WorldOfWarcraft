@@ -69,37 +69,40 @@ public class LeaderCardDisplay : MonoBehaviour
             {
                 if (ID == Leader.Effect.Weather && WeatherCasted)
                 {
-                    if (Position1 == Card.Position.M)
+                    if (ID == Leader.Effect.Weather)
                     {
-                        foreach (Transform card in GameObject.Find("MeleeZoneP1").transform)
+                        if (Position1 == Card.Position.M)
                         {
-                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                            foreach (Transform card in GameObject.Find("MeleeZoneP1").transform)
+                            {
+                                card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                            }
+                            foreach (Transform card in GameObject.Find("MeleeZoneP2").transform)
+                            {
+                                card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                            }
                         }
-                        foreach (Transform card in GameObject.Find("MeleeZoneP2").transform)
+                        if (Position1 == Card.Position.R)
                         {
-                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                            foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
+                            {
+                                card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                            }
+                            foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
+                            {
+                                card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                            }
                         }
-                    }
-                    if (Position1 == Card.Position.R)
-                    {
-                        foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
+                        if (Position1 == Card.Position.S)
                         {
-                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
-                        }
-                        foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
-                        {
-                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
-                        }
-                    }
-                    if (Position1 == Card.Position.S)
-                    {
-                        foreach (Transform card in GameObject.Find("SiegeZoneP1").transform)
-                        {
-                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
-                        }
-                        foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
-                        {
-                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                            foreach (Transform card in GameObject.Find("SiegeZoneP1").transform)
+                            {
+                                card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                            }
+                            foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
+                            {
+                                card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                            }
                         }
                     }
 
@@ -129,7 +132,6 @@ public class LeaderCardDisplay : MonoBehaviour
                                 card.GetComponent<CardDisplay>().Upgraded = true;
                             }
                         }
-                        UpgradeCasted = true;
                     }
                 }
                 else if (transform.parent == GameObject.Find("LeaderZone2").transform)
@@ -157,7 +159,6 @@ public class LeaderCardDisplay : MonoBehaviour
                                 card.GetComponent<CardDisplay>().Upgraded = true;
                             }
                         }
-                        UpgradeCasted = true;
                     }
                 }
             }

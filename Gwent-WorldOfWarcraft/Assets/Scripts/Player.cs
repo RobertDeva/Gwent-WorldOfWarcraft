@@ -12,7 +12,10 @@ public class Player : MonoBehaviour
     public bool Passed = false;
     public bool Drawed = false;
     public bool IsPlaying = false;
-    public bool SustituteSelected = false;
+    public bool UsingLure = false;
+    public bool CardsSwitched= false;
+
+    public int Switches = 0;
 
     public Leader Leader;
     public List<Card> Cards;
@@ -27,7 +30,7 @@ public class Player : MonoBehaviour
     int RangeLinePower = 0;
     int SiegeLinePower = 0;
     int TotalPower = 0;
-
+    
     public TMP_Text MLP;
     public TMP_Text RLP;
     public TMP_Text SLP;
@@ -59,11 +62,7 @@ public class Player : MonoBehaviour
             if(tipe == Card.CardTipe.Unit)
             {
                 if(rank == Card.Rank.Silver)
-                {
-                    if(z == true)
-                    {
-                        Power *= 2;
-                    }
+                {                   
                     if(y == true)
                     {
                         Power -= 2;
@@ -75,6 +74,10 @@ public class Player : MonoBehaviour
                     if (a == true)
                     {
                         Power = 1;
+                    }
+                    if (z == true)
+                    {
+                        Power *= 2;
                     }
                     LinePower += Power;
                 }

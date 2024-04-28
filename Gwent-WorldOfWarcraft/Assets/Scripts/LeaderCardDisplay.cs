@@ -14,10 +14,9 @@ public class LeaderCardDisplay : MonoBehaviour
     public TMP_Text CardDescription;
     public TMP_Text Positions;
     public Image ArtWork;
-    bool EffectCasted1time;
-    bool EffectCasted2time;
-    bool EffectCasted3time;
-    public bool WheaterCasted;
+    bool EffectCasted;
+    public bool WeatherCasted;
+    public bool UpgradeCasted;
     string Name;
     public Card.Position Position1;
     public Card.Position Position2;
@@ -33,7 +32,7 @@ public class LeaderCardDisplay : MonoBehaviour
     {
         ZoomCardP1 = GameObject.Find("ZoomCardP1");
         ZoomCardP2 = GameObject.Find("ZoomCardP2");
-        WheaterCasted = false;
+        WeatherCasted = false;
         card = Player.GetComponent<Player>().Leader;
 
         // Esto son las propiedades de la carta
@@ -52,13 +51,117 @@ public class LeaderCardDisplay : MonoBehaviour
         ArtWork.sprite = card.CardFront;
               
     }
-   
+    public void Update()
+    {
+        if(EffectCasted || WeatherCasted)
+        {
+            LeaderEffect();
+        }
+
+    }
+
     // This method cast Leader effect
     public void LeaderEffect()
     {
         if (Player.GetComponent<Player>().Played == false)
         {
-            if ((!EffectCasted1time || !EffectCasted2time || !EffectCasted3time))
+            if ((WeatherCasted  || UpgradeCasted) && EffectCasted)
+            {
+                if (ID == Leader.Effect.Weather && WeatherCasted)
+                {
+                    if (Position1 == Card.Position.M)
+                    {
+                        foreach (Transform card in GameObject.Find("MeleeZoneP1").transform)
+                        {
+                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                        }
+                        foreach (Transform card in GameObject.Find("MeleeZoneP2").transform)
+                        {
+                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                        }
+                    }
+                    if (Position1 == Card.Position.R)
+                    {
+                        foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
+                        {
+                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                        }
+                        foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
+                        {
+                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                        }
+                    }
+                    if (Position1 == Card.Position.S)
+                    {
+                        foreach (Transform card in GameObject.Find("SiegeZoneP1").transform)
+                        {
+                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                        }
+                        foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
+                        {
+                            card.GetComponent<CardDisplay>().AffectedByWeather = true;
+                        }
+                    }
+
+                }
+                if (transform.parent == GameObject.Find("LeaderZone1").transform)
+                {
+                    if (ID == Leader.Effect.Upgrade)
+                    {
+                        if (Position1 == Card.Position.M || Position2 == Card.Position.M || Position3 == Card.Position.M)
+                        {
+                            foreach (Transform card in GameObject.Find("MeleeZoneP1").transform)
+                            {
+                                card.GetComponent<CardDisplay>().Upgraded = true;
+                            }
+                        }
+                        if (Position1 == Card.Position.R || Position2 == Card.Position.R || Position3 == Card.Position.R)
+                        {
+                            foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
+                            {
+                                card.GetComponent<CardDisplay>().Upgraded = true;
+                            }
+                        }
+                        if (Position1 == Card.Position.S || Position2 == Card.Position.S || Position3 == Card.Position.S)
+                        {
+                            foreach (Transform card in GameObject.Find("SiegeZoneP1").transform)
+                            {
+                                card.GetComponent<CardDisplay>().Upgraded = true;
+                            }
+                        }
+                        UpgradeCasted = true;
+                    }
+                }
+                else if (transform.parent == GameObject.Find("LeaderZone2").transform)
+                {
+                    if (ID == Leader.Effect.Upgrade)
+                    {
+                        if (Position1 == Card.Position.M || Position2 == Card.Position.M || Position3 == Card.Position.M)
+                        {
+                            foreach (Transform card in GameObject.Find("MeleeZoneP2").transform)
+                            {
+                                card.GetComponent<CardDisplay>().Upgraded = true;
+                            }
+                        }
+                        if (Position1 == Card.Position.R || Position2 == Card.Position.R || Position3 == Card.Position.R)
+                        {
+                            foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
+                            {
+                                card.GetComponent<CardDisplay>().Upgraded = true;
+                            }
+                        }
+                        if (Position1 == Card.Position.S || Position2 == Card.Position.S || Position3 == Card.Position.S)
+                        {
+                            foreach (Transform card in GameObject.Find("SiegeZoneP2").transform)
+                            {
+                                card.GetComponent<CardDisplay>().Upgraded = true;
+                            }
+                        }
+                        UpgradeCasted = true;
+                    }
+                }
+            }
+            if (!EffectCasted)
             {
                 if (transform.parent == GameObject.Find("LeaderZone1").transform)
                 {
@@ -113,14 +216,7 @@ public class LeaderCardDisplay : MonoBehaviour
                             }
                         }
                     }
-                }
-
-                if (EffectCasted1time == false)
-                    EffectCasted1time = true;
-                else if (EffectCasted2time == false)
-                    EffectCasted2time = true;
-                else
-                    EffectCasted3time = true;
+                }          
 
                 Player.GetComponent<Player>().Played = true;
             }
@@ -159,15 +255,14 @@ public class LeaderCardDisplay : MonoBehaviour
                         card.GetComponent<CardDisplay>().AffectedByWeather = true;
                     }
                 }
-                if (!WheaterCasted)
-                {
-                    WheaterCasted = true;
-                    Player.GetComponent<Player>().Played = true;
-                }
+                
+                WeatherCasted = true;
+                Player.GetComponent<Player>().Played = true;
             }
-
+            EffectCasted = true;
         }
     }
+    
     void SetEffectDescription()
     {
         if (ID == Leader.Effect.Upgrade)
@@ -176,11 +271,7 @@ public class LeaderCardDisplay : MonoBehaviour
         }
         else if (ID == Leader.Effect.Weather)
         {
-            EffectDescription = "Reduce el ataque de las Unidades de cada fila de las posiciones del Leader a 2";
-        }
-        else
-        {
-            EffectDescription = "Una carta al azar al final de la ronda se queda en el campo";
+            EffectDescription = "Reduce el ataque de las Unidades de una fila de las posiciones del Leader a 2";
         }
     }
     public void OnHoverEnter()

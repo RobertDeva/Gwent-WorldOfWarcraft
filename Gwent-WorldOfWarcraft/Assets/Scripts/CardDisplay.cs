@@ -10,7 +10,7 @@ public class CardDisplay : MonoBehaviour
 {
     GameObject ZoomCardP1;
     GameObject ZoomCardP2;
-   
+
     public Card card;
 
     public TMP_Text CardName;
@@ -66,7 +66,11 @@ public class CardDisplay : MonoBehaviour
     }
     void Update()
     {
-        if((transform.parent != GameObject.Find("HandP1") || transform.parent != GameObject.Find("HandP2")) && Cardtipe == Card.CardTipe.Weather)
+        if ((transform.parent != GameObject.Find("HandP1") || transform.parent != GameObject.Find("HandP2")) && Cardtipe == Card.CardTipe.Weather)
+        {
+            CastEffect();
+        }
+        if ((transform.parent != GameObject.Find("HandP1") || transform.parent != GameObject.Find("HandP2")) && Cardtipe == Card.CardTipe.Upgrade)
         {
             CastEffect();
         }
@@ -81,11 +85,6 @@ public class CardDisplay : MonoBehaviour
 
     //This method cast Card effect
     public void CastEffect()
-    {
-        Invoke(nameof(Effect), 3.0f);
-    }
-
-    void Effect()
     {
         GameObject HandP1 = GameObject.Find("HandP1");
         GameObject HandP2 = GameObject.Find("HandP2");
@@ -188,16 +187,6 @@ public class CardDisplay : MonoBehaviour
                     card.GetComponent<CardDisplay>().Upgraded = true;
                 }
             }
-            if (transform.parent == MeleeUpP1.transform || transform.parent == RangeUpP1.transform || transform.parent == SiegeP1.transform)
-            {
-                transform.SetParent(GameObject.Find("CementeryP1").transform, false);
-                transform.gameObject.SetActive(false);
-            }
-            else
-            {
-                transform.SetParent(GameObject.Find("CementeryP2").transform, false);
-                transform.gameObject.SetActive(false);
-            }
         }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.ClearWeather && Cardtipe == Card.CardTipe.ClearWeather)
         {
@@ -214,7 +203,7 @@ public class CardDisplay : MonoBehaviour
                 if (transform.parent == MeleeP1.transform)
                 {
                     foreach (Transform card in MeleeWheather.transform)
-                    { 
+                    {
                         card.SetParent(GameObject.Find("CementeryP1").transform);
                     }
                     transform.SetParent(GameObject.Find("CementeryP1").transform, false);
@@ -227,7 +216,11 @@ public class CardDisplay : MonoBehaviour
                     }
                     transform.SetParent(GameObject.Find("CementeryP2").transform, false);
                 }
-                
+                if ((GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted && GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().Position1 == Card.Position.M) && (GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted && GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().Position1 == Card.Position.M))
+                {
+                    GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
+                    GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
+                }
             }
             else if (transform.parent == RangeP1.transform || transform.parent == RangeP2.transform)
             {
@@ -255,7 +248,11 @@ public class CardDisplay : MonoBehaviour
                     }
                     transform.SetParent(GameObject.Find("CementeryP2").transform, false);
                 }
-
+                if ((GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted && GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().Position1 == Card.Position.R) && (GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted && GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().Position1 == Card.Position.R))
+                {
+                    GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
+                    GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
+                }
             }
             else
             {
@@ -285,6 +282,11 @@ public class CardDisplay : MonoBehaviour
                 }
 
                 transform.SetParent(GameObject.Find("CementeryP2").transform);
+                if ((GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted && GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().Position1 == Card.Position.S) && (GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted && GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().Position1 == Card.Position.S))
+                {
+                    GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
+                    GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
+                }
             }
 
             foreach (Transform card in GameObject.Find("CementeryP1").transform)
@@ -293,349 +295,305 @@ public class CardDisplay : MonoBehaviour
             }
             foreach (Transform card in GameObject.Find("CementeryP2").transform)
             {
-                card.gameObject.SetActive(false);
+                    card.gameObject.SetActive(false);
             }
-
+            
         }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.CardUp && Cardtipe == Card.CardTipe.Unit)
-        {
-            foreach (Transform card in transform.parent)
             {
-                card.GetComponent<CardDisplay>().Buffed = true;
+                foreach (Transform card in transform.parent)
+                {
+                    card.GetComponent<CardDisplay>().Buffed = true;
+                }
             }
-        }
         else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.CardDown && Cardtipe == Card.CardTipe.Unit)
-        {
-           if(transform.parent == MeleeP1.transform)
-           {
-                foreach(Transform card in MeleeP2.transform)
-                {
-                    card.GetComponent <CardDisplay>().Debuffed = true;
-                }
-           }
-           else if (transform.parent == MeleeP2.transform)
-           {
-               foreach (Transform card in MeleeP1.transform)
-               {
-                   card.GetComponent<CardDisplay>().Debuffed = true;
-               }
-           }
-           else if (transform.parent == RangeP1.transform)
-           {
-               foreach (Transform card in RangeP2.transform)
-               {
-                  card.GetComponent<CardDisplay>().Debuffed = true;
-               }
-           }
-           else if (transform.parent == RangeP2.transform)
-           {
-               foreach (Transform card in RangeP1.transform)
-               {
-                   card.GetComponent<CardDisplay>().Debuffed = true;
-               }
-           }
-           else  if (transform.parent == SiegeP1.transform)
-           {
-               foreach (Transform card in SiegeP2.transform)
-               {
-                   card.GetComponent<CardDisplay>().Debuffed = true;
-               }
-           }
-           else
-           {
-               foreach (Transform card in SiegeP1.transform)
-               {
-                   card.GetComponent<CardDisplay>().Debuffed = true;
-               }
-           }
-        }
-        else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.DestroyCard && Cardtipe == Card.CardTipe.Unit)
-        {
-            if (transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform)
             {
-                System.Random rand = new();
-                int count = 0;
-                int index;
+                if (transform.parent == MeleeP1.transform)
+                {
+                    foreach (Transform card in MeleeP2.transform)
+                    {
+                        card.GetComponent<CardDisplay>().Debuffed = true;
+                    }
+                }
+                else if (transform.parent == MeleeP2.transform)
+                {
+                    foreach (Transform card in MeleeP1.transform)
+                    {
+                        card.GetComponent<CardDisplay>().Debuffed = true;
+                    }
+                }
+                else if (transform.parent == RangeP1.transform)
+                {
+                    foreach (Transform card in RangeP2.transform)
+                    {
+                        card.GetComponent<CardDisplay>().Debuffed = true;
+                    }
+                }
+                else if (transform.parent == RangeP2.transform)
+                {
+                    foreach (Transform card in RangeP1.transform)
+                    {
+                        card.GetComponent<CardDisplay>().Debuffed = true;
+                    }
+                }
+                else if (transform.parent == SiegeP1.transform)
+                {
+                    foreach (Transform card in SiegeP2.transform)
+                    {
+                        card.GetComponent<CardDisplay>().Debuffed = true;
+                    }
+                }
+                else
+                {
+                    foreach (Transform card in SiegeP1.transform)
+                    {
+                        card.GetComponent<CardDisplay>().Debuffed = true;
+                    }
+                }
+            }
+        else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.DestroyCard && Cardtipe == Card.CardTipe.Unit)
+            {
+                if (transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform)
+                {
+                    System.Random rand = new();
+                    int count = 0;
+                    int index;
 
-                foreach (Transform card in MeleeP2.transform)
-                {
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                foreach (Transform card in RangeP2.transform)
-                {
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                foreach (Transform card in SiegeP2.transform)
-                {
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                index = rand.Next(0, count);
-                count = 0;
-                foreach (Transform card in MeleeP2.transform)
-                {
-                    if (count >= index)
+                    foreach (Transform card in MeleeP2.transform)
                     {
-                        if (count == index)
-                        {
-                            card.SetParent(GameObject.Find("CementeryP2").transform, false);
-                            card.gameObject.SetActive(false);
-                        }
-                        break;
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
                     }
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                foreach (Transform card in RangeP2.transform)
-                {
-                    if (count >= index)
+                    foreach (Transform card in RangeP2.transform)
                     {
-                        if (count == index)
-                        {
-                            card.SetParent(GameObject.Find("CementeryP2").transform, false);
-                            card.gameObject.SetActive(false);
-                        }
-                        break;
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
                     }
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                foreach (Transform card in SiegeP2.transform)
-                {
-                    if (count >= index)
+                    foreach (Transform card in SiegeP2.transform)
                     {
-                        if (count == index)
-                        {
-                            card.SetParent(GameObject.Find("CementeryP2").transform, false);
-                            card.gameObject.SetActive(false);
-                        }
-                        break;
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
                     }
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
+                    index = rand.Next(0, count);
+                    count = 0;
+                    foreach (Transform card in MeleeP2.transform)
+                    {
+                        if (count >= index)
+                        {
+                            if (count == index)
+                            {
+                                card.SetParent(GameObject.Find("CementeryP2").transform, false);
+                                card.gameObject.SetActive(false);
+                            }
+                            break;
+                        }
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
+                    }
+                    foreach (Transform card in RangeP2.transform)
+                    {
+                        if (count >= index)
+                        {
+                            if (count == index)
+                            {
+                                card.SetParent(GameObject.Find("CementeryP2").transform, false);
+                                card.gameObject.SetActive(false);
+                            }
+                            break;
+                        }
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
+                    }
+                    foreach (Transform card in SiegeP2.transform)
+                    {
+                        if (count >= index)
+                        {
+                            if (count == index)
+                            {
+                                card.SetParent(GameObject.Find("CementeryP2").transform, false);
+                                card.gameObject.SetActive(false);
+                            }
+                            break;
+                        }
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
+                    }
                 }
+                else
+                {
+                    System.Random rand = new();
+                    int count = 0;
+                    int index = 0;
+
+                    foreach (Transform card in MeleeP1.transform)
+                    {
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
+                    }
+                    foreach (Transform card in RangeP1.transform)
+                    {
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
+                    }
+                    foreach (Transform card in SiegeP1.transform)
+                    {
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
+                    }
+                    index = rand.Next(0, count);
+                    count = 0;
+                    foreach (Transform card in MeleeP1.transform)
+                    {
+                        if (count >= index)
+                        {
+                            if (count == index)
+                            {
+                                card.SetParent(GameObject.Find("CementeryP1").transform, false);
+                                card.gameObject.SetActive(false);
+                            }
+                            break;
+                        }
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
+                    }
+                    foreach (Transform card in RangeP1.transform)
+                    {
+                        if (count >= index)
+                        {
+                            if (count == index)
+                            {
+                                card.SetParent(GameObject.Find("CementeryP1").transform, false);
+                                card.gameObject.SetActive(false);
+                            }
+                            break;
+                        }
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
+                    }
+                    foreach (Transform card in SiegeP1.transform)
+                    {
+                        if (count >= index)
+                        {
+                            if (count == index)
+                            {
+                                card.SetParent(GameObject.Find("CementeryP1").transform, false);
+                                card.gameObject.SetActive(false);
+                            }
+                            break;
+                        }
+                        CardDisplay rb = card.GetComponent<CardDisplay>();
+                        if (rb != null)
+                            count++;
+                    }
+                }
+            }
+        else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.DrawCard && Cardtipe == Card.CardTipe.Unit)
+            {
+                GameObject.Find("DeckP1").GetComponent<Draw>().EffectDraw();
+                GameObject.Find("DeckP2").GetComponent<Draw>().EffectDraw();
+            }
+    }
+
+    void SetEffectDescription()
+        {
+            if (ID == Card.Effect.Upgrade)
+            {
+                EffectDescription = "Duplica el ataque de las Unidades de una fila";
+            }
+            else if (ID == Card.Effect.Weather)
+            {
+                EffectDescription = "Reduce el ataque de las Unidades de una fila a 1";
+            }
+            else if (ID == Card.Effect.Lure)
+            {
+                EffectDescription = "Sustituye una carta en tu lado del campo y la regresa a tu mano";
+            }
+            else if (ID == Card.Effect.ClearWeather)
+            {
+                EffectDescription = "Elimina el efecto de una carta clima en la fila y destruye la carta clima";
+            }
+            else if (ID == Card.Effect.CardUp)
+            {
+                EffectDescription = "Aumenta en 2 el ataque de todas las Unidades de una fila";
+            }
+            else if (ID == Card.Effect.CardDown)
+            {
+                EffectDescription = "Disminuye en 2 el ataque de todas las Unidades de una fila";
+            }
+            else if (ID == Card.Effect.DestroyCard)
+            {
+                EffectDescription = "Destruye una carta al azar del campo contrario";
+            }
+            else if (ID == Card.Effect.DrawCard)
+            {
+                EffectDescription = "Los jugadores roban una carta";
             }
             else
             {
-                System.Random rand = new();
-                int count = 0;
-                int index = 0;
-
-                foreach (Transform card in MeleeP1.transform)
-                {
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                foreach (Transform card in RangeP1.transform)
-                {
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                foreach (Transform card in SiegeP1.transform)
-                {
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                index = rand.Next(0, count);
-                count = 0;
-                foreach (Transform card in MeleeP1.transform)
-                {
-                    if (count >= index)
-                    {
-                        if (count == index)
-                        {
-                            card.SetParent(GameObject.Find("CementeryP1").transform, false);
-                            card.gameObject.SetActive(false);
-                        }
-                        break;
-                    }
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                foreach (Transform card in RangeP1.transform)
-                {
-                    if (count >= index)
-                    {
-                        if (count == index)
-                        {
-                            card.SetParent(GameObject.Find("CementeryP1").transform, false);
-                            card.gameObject.SetActive(false);
-                        }
-                        break;
-                    }
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
-                foreach (Transform card in SiegeP1.transform)
-                {
-                    if (count >= index)
-                    {
-                        if (count == index)
-                        {
-                            card.SetParent(GameObject.Find("CementeryP1").transform, false);
-                            card.gameObject.SetActive(false);
-                        }
-                        break;
-                    }
-                    CardDisplay rb = card.GetComponent<CardDisplay>();
-                    if (rb != null)
-                        count++;
-                }
+                EffectDescription = "No Effect";
             }
         }
-        else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.DrawCard && Cardtipe == Card.CardTipe.Unit)
-        {
-            GameObject.Find("DeckP1").GetComponent<Draw>().EffectDraw();
-            GameObject.Find("DeckP2").GetComponent<Draw>().EffectDraw();
-        }
-        else if ((transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && ID == Card.Effect.Lure && Cardtipe == Card.CardTipe.Lure)
-        {
-            
-            if(transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform)
-            {
-                foreach (Transform card in transform.parent)
-                {
-                    if (card.GetComponent<CardDisplay>().Selected)
-                    {
-                        card.GetComponent<CardDisplay>().InField = false;
-                        card.transform.SetParent(HandP2.transform, false);
-                        break;
-                    }
-                }
-                GameObject.Find("DeckP2").GetComponent<Draw>().CardsInHand++;
-            }
-            else if (transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || SiegeP1.transform)
-            {
-                foreach (Transform card in transform.parent)
-                {
-                    if (card.GetComponent<CardDisplay>().Selected)
-                    {
-                        card.GetComponent<CardDisplay>().InField = false;
-                        card.transform.SetParent(HandP1.transform, false);
-                        break;
-                    }
-                }
-                GameObject.Find("DeckP1").GetComponent<Draw>().CardsInHand++;
-            }
-        }
-    } 
 
-    void SetEffectDescription()
-    {
-        if (ID == Card.Effect.Upgrade)
-        {
-            EffectDescription = "Duplica el ataque de las Unidades de una fila";
-        }
-        else if (ID == Card.Effect.Weather)
-        {
-            EffectDescription = "Reduce el ataque de las Unidades de una fila a 1";
-        }
-        else if (ID == Card.Effect.Lure)
-        {
-            EffectDescription = "Sustituye una carta en tu lado del campo y la regresa a tu mano";
-        }
-        else if (ID == Card.Effect.ClearWeather)
-        {
-            EffectDescription = "Elimina el efecto de una carta clima en la fila y destruye la carta clima";
-        }
-        else if(ID == Card.Effect.CardUp)
-        {
-            EffectDescription = "Aumenta en 2 el ataque de todas las Unidades de una fila";
-        }
-        else if (ID == Card.Effect.CardDown)
-        {
-            EffectDescription = "Disminuye en 2 el ataque de todas las Unidades de una fila";
-        }
-        else if (ID == Card.Effect.DestroyCard)
-        {
-            EffectDescription = "Destruye una carta al azar del campo contrario";
-        }
-        else if(ID == Card.Effect.DrawCard)
-        {
-            EffectDescription = "Los jugadores roban una carta";
-        }
-        else
-        {
-            EffectDescription = "No Effect";
-        }
-    }
-
-    //This method show card stats on the left side of the screen
+        //This method show card stats on the left side of the screen
     public void OnHoverEnter()
     {
-        GameObject HandP1 = GameObject.Find("HandP1");
-        GameObject HandP2 = GameObject.Find("HandP2");
-        GameObject MeleeP1 = GameObject.Find("MeleeZoneP1");
-        GameObject MeleeP2 = GameObject.Find("MeleeZoneP2");
-        GameObject RangeP1 = GameObject.Find("RangeZoneP1");
-        GameObject RangeP2 = GameObject.Find("RangeZoneP2");
-        GameObject SiegeP1 = GameObject.Find("SiegeZoneP1");
-        GameObject SiegeP2 = GameObject.Find("SiegeZoneP2");
-        GameObject MeleeWheather = GameObject.Find("MeleeZoneClima");
-        GameObject RangeWheather = GameObject.Find("RangeZoneClima");
-        GameObject SiegeWheather = GameObject.Find("SiegeZoneClima");
+            GameObject HandP1 = GameObject.Find("HandP1");
+            GameObject HandP2 = GameObject.Find("HandP2");
+            GameObject MeleeP1 = GameObject.Find("MeleeZoneP1");
+            GameObject MeleeP2 = GameObject.Find("MeleeZoneP2");
+            GameObject RangeP1 = GameObject.Find("RangeZoneP1");
+            GameObject RangeP2 = GameObject.Find("RangeZoneP2");
+            GameObject SiegeP1 = GameObject.Find("SiegeZoneP1");
+            GameObject SiegeP2 = GameObject.Find("SiegeZoneP2");
+            GameObject MeleeWheather = GameObject.Find("MeleeZoneClima");
+            GameObject RangeWheather = GameObject.Find("RangeZoneClima");
+            GameObject SiegeWheather = GameObject.Find("SiegeZoneClima");
 
-        if (transform.parent == HandP1.transform || transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform)
-        {
-            ZoomCardP1.GetComponent<ZoomCard>().Name.text = Name;
-            ZoomCardP1.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
-            ZoomCardP1.GetComponent<ZoomCard>().Positions.text = Positions.text;
-            ZoomCardP1.GetComponent<ZoomCard>().Attack.text = Attack.text;
-            ZoomCardP1.GetComponent<ZoomCard>().Description.text = CardDescription.text;
-            ZoomCardP1.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
-        }
-        else if (transform.parent == HandP2.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform)
-        {
-            ZoomCardP2.GetComponent<ZoomCard>().Name.text = Name;
-            ZoomCardP2.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
-            ZoomCardP2.GetComponent<ZoomCard>().Positions.text = Positions.text;
-            ZoomCardP2.GetComponent<ZoomCard>().Attack.text = Attack.text;
-            ZoomCardP2.GetComponent<ZoomCard>().Description.text = CardDescription.text;
-            ZoomCardP2.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
-        }
-        else if (transform.parent == MeleeWheather.transform || transform.parent == RangeWheather.transform || transform.parent == SiegeWheather.transform)
-        {
-            ZoomCardP1.GetComponent<ZoomCard>().Name.text = Name;
-            ZoomCardP2.GetComponent<ZoomCard>().Name.text = Name;
-            ZoomCardP1.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
-            ZoomCardP2.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
-            ZoomCardP1.GetComponent<ZoomCard>().Positions.text = Positions.text;
-            ZoomCardP2.GetComponent<ZoomCard>().Positions.text = Positions.text;
-            ZoomCardP1.GetComponent<ZoomCard>().Attack.text = Attack.text;
-            ZoomCardP2.GetComponent<ZoomCard>().Attack.text = Attack.text;
-            ZoomCardP1.GetComponent<ZoomCard>().Description.text = CardDescription.text;
-            ZoomCardP2.GetComponent<ZoomCard>().Description.text = CardDescription.text;
-            ZoomCardP1.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
-            ZoomCardP2.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
-        }
-    }
-
-    public void OnHoverExit()
-    {
-        if (transform.parent != GameObject.Find("HandP1").transform || transform.parent != GameObject.Find("HandP2").transform)
-        {
-            Selected = false;
-        }
-    }
-
-    public void OnClick()
-    {
-        if(transform.parent != GameObject.Find("HandP1").transform || transform.parent != GameObject.Find("HandP2").transform)
-        {
-            Selected = true;
-        }
+            if ((transform.parent == HandP1.transform || transform.parent == MeleeP1.transform || transform.parent == RangeP1.transform || transform.parent == SiegeP1.transform) && (GameObject.Find("Player1").GetComponent<Player>().IsPlaying || !GameObject.Find("Player1").GetComponent<Player>().CardsSwitched))
+            {
+                ZoomCardP1.GetComponent<ZoomCard>().Name.text = Name;
+                ZoomCardP1.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
+                ZoomCardP1.GetComponent<ZoomCard>().Positions.text = Positions.text;
+                ZoomCardP1.GetComponent<ZoomCard>().Attack.text = Attack.text;
+                ZoomCardP1.GetComponent<ZoomCard>().Description.text = CardDescription.text;
+                ZoomCardP1.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
+            }
+            else if ((transform.parent == HandP2.transform || transform.parent == MeleeP2.transform || transform.parent == RangeP2.transform || transform.parent == SiegeP2.transform) && (GameObject.Find("Player2").GetComponent<Player>().IsPlaying || !GameObject.Find("Player2").GetComponent<Player>().CardsSwitched))
+            {
+                ZoomCardP2.GetComponent<ZoomCard>().Name.text = Name;
+                ZoomCardP2.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
+                ZoomCardP2.GetComponent<ZoomCard>().Positions.text = Positions.text;
+                ZoomCardP2.GetComponent<ZoomCard>().Attack.text = Attack.text;
+                ZoomCardP2.GetComponent<ZoomCard>().Description.text = CardDescription.text;
+                ZoomCardP2.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
+            }
+            else if (transform.parent == MeleeWheather.transform || transform.parent == RangeWheather.transform || transform.parent == SiegeWheather.transform)
+            {
+                ZoomCardP1.GetComponent<ZoomCard>().Name.text = Name;
+                ZoomCardP2.GetComponent<ZoomCard>().Name.text = Name;
+                ZoomCardP1.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
+                ZoomCardP2.GetComponent<ZoomCard>().ArtWork.sprite = card.CardFront;
+                ZoomCardP1.GetComponent<ZoomCard>().Positions.text = Positions.text;
+                ZoomCardP2.GetComponent<ZoomCard>().Positions.text = Positions.text;
+                ZoomCardP1.GetComponent<ZoomCard>().Attack.text = Attack.text;
+                ZoomCardP2.GetComponent<ZoomCard>().Attack.text = Attack.text;
+                ZoomCardP1.GetComponent<ZoomCard>().Description.text = CardDescription.text;
+                ZoomCardP2.GetComponent<ZoomCard>().Description.text = CardDescription.text;
+                ZoomCardP1.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
+                ZoomCardP2.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
+            }
     }
 }
+
+

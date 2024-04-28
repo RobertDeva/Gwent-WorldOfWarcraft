@@ -10,11 +10,11 @@ public class PlayButton : MonoBehaviour
 
     private void Start()
     {
-       // TransitionTrack.Play();
+      TransitionTrack.Play();
     }
     public void Play()
     {
-
+        PlayGame.Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
    

@@ -53,14 +53,18 @@ public class GameManager : MonoBehaviour
         VictoriesP2 = 0; 
         P1start = true;
         P2start = false;
+        P1.GetComponent<Player>().CardsSwitched = true;
+        P2.GetComponent<Player>().CardsSwitched = true;
     }
 
     private void Update()
     {
-        Invoke(nameof(Play), 1.0f);
-        Turns();
-        Invoke(nameof(EndRound), 0.5f);
-       
+        if (P1.GetComponent<Player>().CardsSwitched && P2.GetComponent<Player>().CardsSwitched)
+        {
+            Invoke(nameof(Play), 0.5f);
+            Turns();
+            Invoke(nameof(EndRound), 0.5f);
+        }
     }
     //This method mark the begin of a new round
     public void BeginRound()
@@ -92,51 +96,28 @@ public class GameManager : MonoBehaviour
     {
         if (P1.GetComponent<Player>().Passed == false && P2.GetComponent<Player>().Passed == false)
         { 
-            if(P2.GetComponent<Player>().Passed)
-            {
-                foreach (Transform card in GameObject.Find("HandP1").transform)
-                {
-                   card.gameObject.SetActive(true);
-                }
-                P1Turn = true;
-            }
+            
             if(P1Turn || P1start || P2.GetComponent<Player>().Passed)
             {
                 P1Turn = true;
                 P2.GetComponent<Player>().Drawed = false;
-                foreach (Transform card in GameObject.Find("HandP2").transform)
-                {
-                    card.gameObject.SetActive(false);
+                foreach (Transform x in GameObject.Find("HandP1").transform)
+                { 
+                    x.GetChild(x.transform.childCount - 1).gameObject.SetActive(false);
                 }
-                foreach (Transform card in GameObject.Find("HandP1").transform)
-                {
-                    card.gameObject.SetActive(true);
-                }
-
                 Turn.text = "P1 Turn";
                 if (!P1.GetComponent<Player>().Played)
                      P1.GetComponent<Player>().IsPlaying = true;
                 P1start = false;
             }
-            if (P1.GetComponent<Player>().Passed)
-            {
-                foreach (Transform card in GameObject.Find("HandP2").transform)
-                {
-                    card.gameObject.SetActive(true);
-                }
-                P2Turn = true;
-            }
+           
             if (P2Turn || P2start || P1.GetComponent<Player>().Passed)
             {
                 P2Turn = true;
                 P1.GetComponent<Player>().Drawed = false;
-                foreach (Transform card in GameObject.Find("HandP2").transform)
+                foreach (Transform x in GameObject.Find("HandP2").transform)
                 {
-                    card.gameObject.SetActive(true);
-                }
-                foreach (Transform card in GameObject.Find("HandP1").transform)
-                {
-                    card.gameObject.SetActive(false);
+                    x.GetChild(x.transform.childCount - 1).gameObject.SetActive(false);
                 }
                 Turn.text = "P2 Turn";
                 if (!P2.GetComponent<Player>().Played)
@@ -154,17 +135,15 @@ public class GameManager : MonoBehaviour
         {
             BattleTrack.Pause();
             EndRoundTrack.Play();
-            if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted || GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WheaterCasted)
+            if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted || GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted)
             {
-                if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted)
+                if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted)
                 {
-                    GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().LeaderEffect();
-                    GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WheaterCasted = false;
+                    GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
                 }
                 else
                 {
-                    GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().LeaderEffect();
-                    GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WheaterCasted = false;
+                    GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
                 }
             }
             foreach(Transform card in GameObject.Find("MeleeZoneClima").transform)
@@ -350,32 +329,25 @@ public class GameManager : MonoBehaviour
         {
             P1start = false;
             P1.GetComponent<Player>().IsPlaying = false;
-            P1.GetComponent<Player>().SustituteSelected = false;
+            P1.GetComponent<Player>().UsingLure = false;
             if (P1.GetComponent<Player>().Played == false)
             {
-                if(P2.GetComponent<Player>().Passed == false)
-                {
-                    foreach(Transform card in GameObject.Find("HandP2").transform)
-                    {
-                        card.gameObject.SetActive(true);
-                    }
-                }
                 P1.GetComponent<Player>().Passed = true;
+                P1Turn = false;
             }
             P1.GetComponent<Player>().Played = false;
-            P1Turn = false;
             if (P2.GetComponent<Player>().Passed == false)
             {
                 P2Turn = true;
+                P1Turn = false;
                 P2.GetComponent<Player>().IsPlaying = true;
                 Turn.text = "P2 Turn";
-            }
-                foreach (Transform card in GameObject.Find("HandP1").transform)
+                foreach (Transform x in GameObject.Find("HandP1").transform)
                 {
-                    card.gameObject.SetActive(false);
+                    x.GetChild(x.transform.childCount - 1).gameObject.SetActive(true);
                 }
+            }
             
-
         }
     }
     //This method switch to  other player turn
@@ -385,32 +357,24 @@ public class GameManager : MonoBehaviour
         {
             P2start = false;
             P2.GetComponent<Player>().IsPlaying = false;
-            P2.GetComponent<Player>().SustituteSelected = false;
+            P2.GetComponent<Player>().UsingLure = false;
             if (P2.GetComponent<Player>().Played == false)
             {
-                if (P1.GetComponent<Player>().Passed == false)
-                {
-                    foreach (Transform card in GameObject.Find("HandP1").transform)
-                    {
-                        card.gameObject.SetActive(true);
-                    }
-                }
-                P2.GetComponent<Player>().Passed = true;
+               P2.GetComponent<Player>().Passed = true;
+               P2Turn = false;
             }
             P2.GetComponent<Player>().Played = false;
-            P2Turn = false;
             if (P1.GetComponent<Player>().Passed == false)
             {
                 P1Turn = true;
+                P2Turn = false;
                 P1.GetComponent<Player>().IsPlaying = true;
                 Turn.text = "P1 Turn";
-            }
-                foreach (Transform card in GameObject.Find("HandP2").transform)
+                foreach (Transform x in GameObject.Find("HandP2").transform)
                 {
-                    card.gameObject.SetActive(false);
+                    x.GetChild(x.transform.childCount - 1).gameObject.SetActive(true);
                 }
-            
-            
+            }
         }
     }
     //This method clean the field after finish the round

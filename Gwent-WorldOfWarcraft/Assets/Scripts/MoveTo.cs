@@ -23,10 +23,11 @@ public class MoveTo: MonoBehaviour
     GameObject RangeUpP2;
     GameObject SiegeUpP1;
     GameObject SiegeUpP2;
-    GameObject MeleeWheather;
-    GameObject RangeWheather;
-    GameObject SiegeWheather;
-    readonly int WheatherLimit = 1;
+    GameObject MeleeWeather;
+    GameObject RangeWeather;
+    GameObject SiegeWeather;
+    readonly int SpecialCardLimit = 1;
+
 
     Transform startParent;
 
@@ -51,9 +52,9 @@ public class MoveTo: MonoBehaviour
         RangeUpP2 = GameObject.Find("RangeZoneUpP2");
         SiegeUpP1 = GameObject.Find("SiegeZoneUpP1");
         SiegeUpP2 = GameObject.Find("SiegeZoneUpP2");
-        MeleeWheather = GameObject.Find("MeleeZoneClima");
-        RangeWheather = GameObject.Find("RangeZoneClima");
-        SiegeWheather = GameObject.Find("SiegeZoneClima");
+        MeleeWeather = GameObject.Find("MeleeZoneClima");
+        RangeWeather = GameObject.Find("RangeZoneClima");
+        SiegeWeather = GameObject.Find("SiegeZoneClima");
     }
 
     //This method set cards on the field
@@ -66,7 +67,7 @@ public class MoveTo: MonoBehaviour
         if(((startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false) || (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)) && a == Card.CardTipe.Weather)
         {
             int WheaterInField = 0;
-            foreach(Transform  card in MeleeWheather.transform)
+            foreach(Transform  card in MeleeWeather.transform)
             {
                 CardDisplay rb = card.GetComponent<CardDisplay>();
                 if(rb != null)
@@ -74,13 +75,15 @@ public class MoveTo: MonoBehaviour
                     WheaterInField++;
                 }
             }
-            if (WheaterInField >= WheatherLimit)
+            if (WheaterInField >= SpecialCardLimit)
             {
-
+                foreach(Transform card in MeleeWeather.transform)
+                {
+                    card.SetParent(GameObject.Find("CementeryP1").transform);
+                    card.gameObject.SetActive(false);
+                }
             }
-            else
-            {
-                transform.SetParent(MeleeWheather.transform, false);
+                transform.SetParent(MeleeWeather.transform, false);
                 GetComponent<CardDisplay>().InField = true;
                 if (startParent == HandP1.transform)
                 {
@@ -93,44 +96,6 @@ public class MoveTo: MonoBehaviour
                     DeckP2.GetComponent<Draw>().CardsInHand--;
                 }
                 transform.GetComponent<CardDisplay>().CastEffect();
-            }
-        }
-        else if(((startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false) || (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)) && a == Card.CardTipe.Lure)
-        {
-            int CardInZoneP1 = 0;
-            int CardInZoneP2 = 0;
-            foreach (Transform card in MeleeP1.transform)
-            {
-                CardDisplay rb = card.GetComponent<CardDisplay>();
-                if (rb != null)
-                {
-                    CardInZoneP1++;
-                }
-            }
-            foreach (Transform card in MeleeP2.transform)
-            {
-                CardDisplay rb = card.GetComponent<CardDisplay>();
-                if (rb != null)
-                {
-                    CardInZoneP2++;
-                }
-            }
-            if (startParent == HandP1.transform && CardInZoneP1 > 0)
-            {
-                transform.SetParent(MeleeP1.transform, false);
-                GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().Played = true;
-                DeckP1.GetComponent<Draw>().CardsInHand--;
-                transform.GetComponent<CardDisplay>().CastEffect();
-            }
-            else if (startParent == HandP2.transform && CardInZoneP2 > 0)
-            {
-                transform.SetParent(MeleeP2.transform, false);
-                GetComponent<CardDisplay>().InField = true;
-                P2.GetComponent<Player>().Played = true;
-                DeckP2.GetComponent<Draw>().CardsInHand--;
-                transform.GetComponent<CardDisplay>().CastEffect();
-            }
         }
         else if(startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false)
         {
@@ -144,6 +109,23 @@ public class MoveTo: MonoBehaviour
             }
             else if (a == Card.CardTipe.Upgrade)
             {
+                int UpgradeInField = 0;
+                foreach (Transform card in MeleeUpP1.transform)
+                {
+                    CardDisplay rb = card.GetComponent<CardDisplay>();
+                    if (rb != null)
+                    {
+                        UpgradeInField++;
+                    }
+                }
+                if (UpgradeInField >= SpecialCardLimit)
+                {
+                    foreach (Transform card in MeleeUpP1.transform)
+                    {
+                        card.SetParent(GameObject.Find("CementeryP1").transform);
+                        card.gameObject.SetActive(false);
+                    }
+                }
                 transform.SetParent(MeleeUpP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
                 P1.GetComponent<Player>().Played = true;
@@ -162,7 +144,24 @@ public class MoveTo: MonoBehaviour
                 transform.GetComponent<CardDisplay>().CastEffect();
             }
             else if (a == Card.CardTipe.Upgrade)
-            { 
+            {
+                int UpgradeInField = 0;
+                foreach (Transform card in MeleeUpP2.transform)
+                {
+                    CardDisplay rb = card.GetComponent<CardDisplay>();
+                    if (rb != null)
+                    {
+                        UpgradeInField++;
+                    }
+                }
+                if (UpgradeInField >= SpecialCardLimit)
+                {
+                    foreach (Transform card in MeleeUpP2.transform)
+                    {
+                        card.SetParent(GameObject.Find("CementeryP2").transform);
+                        card.gameObject.SetActive(false);
+                    }
+                }
                 transform.SetParent(MeleeUpP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
                 P2.GetComponent<Player>().Played = true;
@@ -182,7 +181,7 @@ public class MoveTo: MonoBehaviour
         if (((startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false) || (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)) && a == Card.CardTipe.Weather)
         {
             int WheaterInField = 0;
-            foreach (Transform card in RangeWheather.transform)
+            foreach (Transform card in RangeWeather.transform)
             {
                 CardDisplay rb = card.GetComponent<CardDisplay>();
                 if (rb != null)
@@ -190,64 +189,29 @@ public class MoveTo: MonoBehaviour
                     WheaterInField++;
                 }
             }
-            if (WheaterInField >= WheatherLimit)
+            if (WheaterInField >= SpecialCardLimit)
             {
-
+                foreach (Transform card in RangeWeather.transform)
+                {
+                    card.SetParent(GameObject.Find("CementeryP1").transform);
+                    card.gameObject.SetActive(false);
+                }
+            }
+            transform.SetParent(RangeWeather.transform, false);
+            GetComponent<CardDisplay>().InField = true;
+            if (startParent == HandP1.transform)
+            {
+                P1.GetComponent<Player>().Played = true;
+                DeckP1.GetComponent<Draw>().CardsInHand--;
             }
             else
             {
-                transform.SetParent(RangeWheather.transform, false);
-                GetComponent<CardDisplay>().InField = true;
-                if (startParent == HandP1.transform)
-                {
-                    P1.GetComponent<Player>().Played = true;
-                    DeckP1.GetComponent<Draw>().CardsInHand--;
-                }
-                else
-                {
-                    P2.GetComponent<Player>().Played = true;
-                    DeckP2.GetComponent<Draw>().CardsInHand--;
-                }
-                transform.GetComponent<CardDisplay>().CastEffect();
-            }
-        }
-        else if (((startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false) || (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)) && a == Card.CardTipe.Lure)
-        {
-            int CardInZoneP1 = 0;
-            int CardInZoneP2 = 0;
-            foreach (Transform card in RangeP1.transform)
-            {
-                CardDisplay rb = card.GetComponent<CardDisplay>();
-                if (rb != null)
-                {
-                    CardInZoneP1++;
-                }
-            }
-            foreach (Transform card in RangeP2.transform)
-            {
-                CardDisplay rb = card.GetComponent<CardDisplay>();
-                if (rb != null)
-                {
-                    CardInZoneP2++;
-                }
-            }
-            if (startParent == HandP1.transform && CardInZoneP1 > 0)
-            {
-                transform.SetParent(RangeP1.transform, false);
-                GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().Played = true;
-                DeckP1.GetComponent<Draw>().CardsInHand--;
-                transform.GetComponent<CardDisplay>().CastEffect();
-            }
-            else if (startParent == HandP2.transform && CardInZoneP2 > 0)
-            {
-                transform.SetParent(RangeP2.transform, false);
-                GetComponent<CardDisplay>().InField = true;
                 P2.GetComponent<Player>().Played = true;
                 DeckP2.GetComponent<Draw>().CardsInHand--;
-                transform.GetComponent<CardDisplay>().CastEffect();
             }
+            transform.GetComponent<CardDisplay>().CastEffect();
         }
+       
         else if (startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false)
         {
             if ((a == Card.CardTipe.Unit && (x == Card.Position.R || y == Card.Position.R || z == Card.Position.R)) || a == Card.CardTipe.ClearWeather)
@@ -260,6 +224,23 @@ public class MoveTo: MonoBehaviour
             }
             else if (a == Card.CardTipe.Upgrade)
             {
+                int UpgradeInField = 0;
+                foreach (Transform card in RangeUpP1.transform)
+                {
+                    CardDisplay rb = card.GetComponent<CardDisplay>();
+                    if (rb != null)
+                    {
+                        UpgradeInField++;
+                    }
+                }
+                if (UpgradeInField >= SpecialCardLimit)
+                {
+                    foreach (Transform card in RangeUpP1.transform)
+                    {
+                        card.SetParent(GameObject.Find("CementeryP1").transform);
+                        card.gameObject.SetActive(false);
+                    }
+                }
                 transform.SetParent(RangeUpP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
                 P1.GetComponent<Player>().Played = true;
@@ -279,6 +260,23 @@ public class MoveTo: MonoBehaviour
             }
             else if (a == Card.CardTipe.Upgrade)
             {
+                int UpgradeInField = 0;
+                foreach (Transform card in RangeUpP2.transform)
+                {
+                    CardDisplay rb = card.GetComponent<CardDisplay>();
+                    if (rb != null)
+                    {
+                        UpgradeInField++;
+                    }
+                }
+                if (UpgradeInField >= SpecialCardLimit)
+                {
+                    foreach (Transform card in RangeUpP2.transform)
+                    {
+                        card.SetParent(GameObject.Find("CementeryP2").transform);
+                        card.gameObject.SetActive(false);
+                    }
+                }
                 transform.SetParent(RangeUpP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
                 P2.GetComponent<Player>().Played = true;
@@ -298,7 +296,7 @@ public class MoveTo: MonoBehaviour
         if (((startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false) || (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)) && a == Card.CardTipe.Weather)
         {
             int WheaterInField = 0;
-            foreach (Transform card in SiegeWheather.transform)
+            foreach (Transform card in SiegeWeather.transform)
             {
                 CardDisplay rb = card.GetComponent<CardDisplay>();
                 if (rb != null)
@@ -306,63 +304,27 @@ public class MoveTo: MonoBehaviour
                     WheaterInField++;
                 }
             }
-            if (WheaterInField >= WheatherLimit)
+            if (WheaterInField >= SpecialCardLimit)
             {
-
+                foreach (Transform card in SiegeWeather.transform)
+                {
+                    card.SetParent(GameObject.Find("CementeryP1").transform);
+                    card.gameObject.SetActive(false);
+                }
+            }
+            transform.SetParent(SiegeWeather.transform, false);
+            GetComponent<CardDisplay>().InField = true;
+            if (startParent == HandP1.transform)
+            {
+                P1.GetComponent<Player>().Played = true;
+                DeckP1.GetComponent<Draw>().CardsInHand--;
             }
             else
             {
-                transform.SetParent(SiegeWheather.transform, false);
-                GetComponent<CardDisplay>().InField = true;
-                if (startParent == HandP1.transform)
-                {
-                    P1.GetComponent<Player>().Played = true;
-                    DeckP1.GetComponent<Draw>().CardsInHand--;
-                }
-                else
-                {
-                    P2.GetComponent<Player>().Played = true;
-                    DeckP2.GetComponent<Draw>().CardsInHand--;
-                }
-                transform.GetComponent<CardDisplay>().CastEffect();
-            }
-        }
-        else if (((startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false) || (startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)) && a == Card.CardTipe.Lure)
-        {
-            int CardInZoneP1 = 0;
-            int CardInZoneP2 = 0;
-            foreach (Transform card in SiegeP1.transform)
-            {
-                CardDisplay rb = card.GetComponent<CardDisplay>();
-                if (rb != null)
-                {
-                    CardInZoneP1++;
-                }
-            }
-            foreach (Transform card in SiegeP2.transform)
-            {
-                CardDisplay rb = card.GetComponent<CardDisplay>();
-                if (rb != null)
-                {
-                    CardInZoneP2++;
-                }
-            }
-            if (startParent == HandP1.transform && CardInZoneP1 > 0)
-            {
-                transform.SetParent(SiegeP1.transform, false);
-                GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().Played = true;
-                DeckP1.GetComponent<Draw>().CardsInHand--;
-                transform.GetComponent<CardDisplay>().CastEffect();
-            }
-            else if (startParent == HandP2.transform && CardInZoneP2 > 0)
-            {
-                transform.SetParent(SiegeP2.transform, false);
-                GetComponent<CardDisplay>().InField = true;
                 P2.GetComponent<Player>().Played = true;
                 DeckP2.GetComponent<Draw>().CardsInHand--;
-                transform.GetComponent<CardDisplay>().CastEffect();
             }
+            transform.GetComponent<CardDisplay>().CastEffect();
         }
         else if (startParent == HandP1.transform && P1.GetComponent<Player>().IsPlaying == true && P1.GetComponent<Player>().Played == false)
         {
@@ -376,6 +338,23 @@ public class MoveTo: MonoBehaviour
             }
             else if (a == Card.CardTipe.Upgrade)
             {
+                int UpgradeInField = 0;
+                foreach (Transform card in SiegeUpP1.transform)
+                {
+                    CardDisplay rb = card.GetComponent<CardDisplay>();
+                    if (rb != null)
+                    {
+                        UpgradeInField++;
+                    }
+                }
+                if (UpgradeInField >= SpecialCardLimit)
+                {
+                    foreach (Transform card in SiegeUpP1.transform)
+                    {
+                        card.SetParent(GameObject.Find("CementeryP1").transform);
+                        card.gameObject.SetActive(false);
+                    }
+                }
                 transform.SetParent(SiegeUpP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
                 P1.GetComponent<Player>().Played = true;
@@ -395,6 +374,23 @@ public class MoveTo: MonoBehaviour
             }
             else if (a == Card.CardTipe.Upgrade)
             {
+                int UpgradeInField = 0;
+                foreach (Transform card in SiegeUpP2.transform)
+                {
+                    CardDisplay rb = card.GetComponent<CardDisplay>();
+                    if (rb != null)
+                    {
+                        UpgradeInField++;
+                    }
+                }
+                if (UpgradeInField >= SpecialCardLimit)
+                {
+                    foreach (Transform card in SiegeUpP2.transform)
+                    {
+                        card.SetParent(GameObject.Find("CementeryP2").transform);
+                        card.gameObject.SetActive(false);
+                    }
+                }
                 transform.SetParent(SiegeUpP2.transform, false);
                 GetComponent<CardDisplay>().InField = true;
                 P2.GetComponent<Player>().Played = true;
@@ -402,6 +398,20 @@ public class MoveTo: MonoBehaviour
                 transform.GetComponent<CardDisplay>().CastEffect();
             }
 
+        }
+    }
+
+    public void LureSwitch()
+    {
+        if(transform.parent == HandP1.transform && transform.GetComponent<CardDisplay>().Cardtipe == Card.CardTipe.Lure && P1.GetComponent<Player>().IsPlaying && !P1.GetComponent<Player>().Played && !P1.GetComponent<Player>().UsingLure)
+        {
+            transform.GetComponent<CardDisplay>().Selected = true;
+            P1.GetComponent<Player>().UsingLure = true;
+        }
+        else if (transform.parent == HandP2.transform && transform.GetComponent<CardDisplay>().Cardtipe == Card.CardTipe.Lure && P2.GetComponent<Player>().IsPlaying && !P2.GetComponent<Player>().Played && !P2.GetComponent<Player>().UsingLure)
+        {
+            transform.GetComponent<CardDisplay>().Selected = true;
+            P2.GetComponent <Player>().UsingLure = true;
         }
     }
 

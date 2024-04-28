@@ -16,8 +16,8 @@ public class Draw : MonoBehaviour
     public GameObject Hand;
     GameObject CementeryP1;
     GameObject CementeryP2;
-    List<Card> Deck;
-    
+    public List<Card> Deck;
+    public List<Card> ShuffleDeck;
     void Start()
     {
         Deck = Player.Shuffle(player.GetComponent<Player>().Cards);
@@ -121,5 +121,20 @@ public class Draw : MonoBehaviour
         
     }
     
+    public void ShuffleAgain()
+    {
+        for (int i = 10; i < Deck.Count;)
+        {
+            ShuffleDeck.Add(Deck[i]);
+            Deck.RemoveAt(i);
+        }
+        ShuffleDeck = Player.Shuffle(ShuffleDeck);
+        foreach (Card card in ShuffleDeck)
+        {
+            Deck.Add(card);
+        }
+        EffectDraw();
+        Invoke(nameof(EffectDraw), 0.2f);
+    }
     
 }

@@ -10,6 +10,8 @@ public class CardDisplay : MonoBehaviour
 {
     GameObject ZoomCardP1;
     GameObject ZoomCardP2;
+    GameObject HandP1;
+    GameObject HandP2;
 
     public Card card;
 
@@ -39,6 +41,8 @@ public class CardDisplay : MonoBehaviour
     {
         ZoomCardP1 = GameObject.Find("ZoomCardP1");
         ZoomCardP2 = GameObject.Find("ZoomCardP2");
+        HandP1 = GameObject.Find("HandP1");
+        HandP2 = GameObject.Find("HandP2");
 
         // Son las propiedades de la carta
         Name = card.CardName;
@@ -86,8 +90,6 @@ public class CardDisplay : MonoBehaviour
     //This method cast Card effect
     public void CastEffect()
     {
-        GameObject HandP1 = GameObject.Find("HandP1");
-        GameObject HandP2 = GameObject.Find("HandP2");
         GameObject MeleeP1 = GameObject.Find("MeleeZoneP1");
         GameObject MeleeP2 = GameObject.Find("MeleeZoneP2");
         GameObject RangeP1 = GameObject.Find("RangeZoneP1");
@@ -545,7 +547,7 @@ public class CardDisplay : MonoBehaviour
             }
         }
 
-        //This method show card stats on the left side of the screen
+    //This method show card stats on the left side of the screen
     public void OnHoverEnter()
     {
             GameObject HandP1 = GameObject.Find("HandP1");
@@ -593,6 +595,29 @@ public class CardDisplay : MonoBehaviour
                 ZoomCardP1.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
                 ZoomCardP2.GetComponent<ZoomCard>().CardTipe.text = CardTipe.text;
             }
+    }
+
+    public void OnClick()
+    {
+        if (!GameObject.Find("Player1").GetComponent<Player>().CardsSwitched && !GameObject.Find("Player2").GetComponent<Player>().CardsSwitched)
+        {
+            if (transform.parent == HandP1.transform && !GameObject.Find("Player1").GetComponent<Player>().CardsSwitched && GameObject.Find("Player1").GetComponent<Player>().Switches < 2)
+            {
+                GameObject.Find("Player1").GetComponent<Player>().Switches++;
+                GameObject.Find("DeckP1").GetComponent<Draw>().CardsInHand--;
+                GameObject.Find("DeckP1").GetComponent<Draw>().ShuffleDeck.Add(card);
+                transform.SetParent(GameObject.Find("CementeryP1").transform, false);
+                transform.gameObject.SetActive(false);
+            }
+            else if (transform.parent == HandP2.transform && !GameObject.Find("Player2").GetComponent<Player>().CardsSwitched && GameObject.Find("Player2").GetComponent<Player>().Switches < 2)
+            {
+                GameObject.Find("Player2").GetComponent<Player>().Switches++;
+                GameObject.Find("DeckP2").GetComponent<Draw>().CardsInHand--;
+                GameObject.Find("DeckP2").GetComponent<Draw>().ShuffleDeck.Add(card);
+                transform.SetParent(GameObject.Find("CementeryP2").transform, false);
+                transform.gameObject.SetActive(false);
+            }
+        }
     }
 }
 

@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 0
   Position3: 0
   CardRank: 2
-  ID: 8
+  ID: 10
   Description: Caballero que protege las puertas de la ciudad de Ventormenta
   Positions: M
   CardFront: {fileID: 21300000, guid: 4521cb171e43b7a469bd340007f1925c, type: 3}

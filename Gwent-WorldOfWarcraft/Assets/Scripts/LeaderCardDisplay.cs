@@ -65,13 +65,13 @@ public class LeaderCardDisplay : MonoBehaviour
     {
         if (Player.GetComponent<Player>().Played == false)
         {
-            if ((WeatherCasted  || UpgradeCasted) && EffectCasted)
+            if (WeatherCasted  || UpgradeCasted)
             {
                 if (ID == Leader.Effect.Weather && WeatherCasted)
                 {
                     if (ID == Leader.Effect.Weather)
                     {
-                        if (Position1 == Card.Position.M)
+                        if (Position1 == Card.Position.M || Position2 == Card.Position.M || Position3 == Card.Position.M)
                         {
                             foreach (Transform card in GameObject.Find("MeleeZoneP1").transform)
                             {
@@ -82,7 +82,7 @@ public class LeaderCardDisplay : MonoBehaviour
                                 card.GetComponent<CardDisplay>().AffectedByWeather = true;
                             }
                         }
-                        if (Position1 == Card.Position.R)
+                        if (Position1 == Card.Position.R || Position2 == Card.Position.R || Position3 == Card.Position.R)
                         {
                             foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
                             {
@@ -93,7 +93,7 @@ public class LeaderCardDisplay : MonoBehaviour
                                 card.GetComponent<CardDisplay>().AffectedByWeather = true;
                             }
                         }
-                        if (Position1 == Card.Position.S)
+                        if (Position1 == Card.Position.S || Position2 == Card.Position.S || Position3 == Card.Position.S)
                         {
                             foreach (Transform card in GameObject.Find("SiegeZoneP1").transform)
                             {
@@ -107,7 +107,7 @@ public class LeaderCardDisplay : MonoBehaviour
                     }
 
                 }
-                if (transform.parent == GameObject.Find("LeaderZone1").transform)
+                else if (transform.parent == GameObject.Find("LeaderZone1").transform)
                 {
                     if (ID == Leader.Effect.Upgrade)
                     {
@@ -184,12 +184,32 @@ public class LeaderCardDisplay : MonoBehaviour
                         }
                         if (Position1 == Card.Position.S || Position2 == Card.Position.S || Position3 == Card.Position.S)
                         {
-                            foreach (Transform card in GameObject.Find("SiegeZoneP1").transform)
+                            foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
                             {
                                 card.GetComponent<CardDisplay>().Upgraded = true;
                             }
                         }
                     }
+                    else if(ID == Leader.Effect.SaveCard)
+                    {
+                        List<CardDisplay> cards = new();
+                        foreach (Transform card in GameObject.Find("MeleeZoneP1").transform)
+                        {
+                            cards.Add(card.GetComponent<CardDisplay>());
+                        }
+                        foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
+                        {
+                            cards.Add(card.GetComponent<CardDisplay>());
+                        }
+                        foreach (Transform card in GameObject.Find("RangeZoneP1").transform)
+                        {
+                            cards.Add(card.GetComponent<CardDisplay>());
+                        }
+                        int x = Random.Range(0,cards.Count);
+                        cards[x].BondInField = true;
+                        
+                    }
+                    Player.GetComponent<Player>().Played = true;
                 }
                 else if (transform.parent == GameObject.Find("LeaderZone2").transform)
                 {
@@ -217,9 +237,27 @@ public class LeaderCardDisplay : MonoBehaviour
                             }
                         }
                     }
-                }          
+                    else if (ID == Leader.Effect.SaveCard)
+                    {
+                        List<CardDisplay> cards = new();
+                        foreach (Transform card in GameObject.Find("MeleeZoneP2").transform)
+                        {
+                            cards.Add(card.GetComponent<CardDisplay>());
+                        }
+                        foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
+                        {
+                            cards.Add(card.GetComponent<CardDisplay>());
+                        }
+                        foreach (Transform card in GameObject.Find("RangeZoneP2").transform)
+                        {
+                            cards.Add(card.GetComponent<CardDisplay>());
+                        }
+                        int x = Random.Range(0, cards.Count);
+                        cards[x].BondInField = true;
 
-                Player.GetComponent<Player>().Played = true;
+                    }
+                    Player.GetComponent<Player>().Played = true;
+                }          
             }
             if (ID == Leader.Effect.Weather)
             {
@@ -273,6 +311,10 @@ public class LeaderCardDisplay : MonoBehaviour
         else if (ID == Leader.Effect.Weather)
         {
             EffectDescription = "Reduce el ataque de las Unidades de una fila de las posiciones del Leader a 2";
+        }
+        else
+        {
+            EffectDescription = "Una carta en tu lado del campo se queda en el campo al finalizar la ronda";
         }
     }
     public void OnHoverEnter()

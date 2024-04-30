@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 0
   Position3: 0
   CardRank: 2
-  ID: 8
+  ID: 7
   Description: Un troll entrenado en el rastreo y la persecusion de presas y enemigos
   Positions: M
   CardFront: {fileID: 21300000, guid: e366f9eeb9aeacf4bbb21dba7b6e62ef, type: 3}

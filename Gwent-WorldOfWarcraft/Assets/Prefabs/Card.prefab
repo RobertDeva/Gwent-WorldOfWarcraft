@@ -353,6 +353,7 @@ MonoBehaviour:
   Buffed: 0
   Debuffed: 0
   Selected: 0
+  BondInField: 0
 --- !u!114 &-1290849901961665873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,7 +945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 854710684784656319, guid: 089e80e266cdef1478479e82f153dfb7, type: 3}
       propertyPath: m_fontSizeMin
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 854710684784656319, guid: 089e80e266cdef1478479e82f153dfb7, type: 3}
       propertyPath: m_wordSpacing

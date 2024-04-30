@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 1
   Position3: 2
   CardRank: 2
-  ID: 7
+  ID: 12
   Description: Un orco que practica la brujeria y es leal a los heroes de la horda
   Positions: R S
   CardFront: {fileID: 21300000, guid: 13cf4aff7eb82cc408be27c937c75cfe, type: 3}

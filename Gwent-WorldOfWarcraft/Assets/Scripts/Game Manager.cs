@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         if (P1.GetComponent<Player>().Passed == false && P2.GetComponent<Player>().Passed == false)
         {
 
-            if (P1Turn || P1start || P2.GetComponent<Player>().Passed)
+            if ((P1Turn || P1start || P2.GetComponent<Player>().Passed) && !P1.GetComponent<Player>().Passed)
             {
                 P1Turn = true;
                 P2.GetComponent<Player>().Drawed = false;
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
                 P1start = false;
             }
 
-            if (P2Turn || P2start || P1.GetComponent<Player>().Passed)
+            if ((P2Turn || P2start || P1.GetComponent<Player>().Passed) && !P2.GetComponent<Player>().Passed)
             {
                 P2Turn = true;
                 P1.GetComponent<Player>().Drawed = false;
@@ -147,14 +147,13 @@ public class GameManager : MonoBehaviour
             EndRoundTrack.Play();
             if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted || GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted)
             {
-                if (GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted)
-                {
-                    GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
-                }
-                else
-                {
-                    GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
-                }
+                GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
+                GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().WeatherCasted = false;
+            }
+            if(GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().UpgradeCasted || GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().UpgradeCasted)
+            {
+                GameObject.Find("LeaderP1").GetComponent<LeaderCardDisplay>().UpgradeCasted = false;
+                GameObject.Find("LeaderP2").GetComponent<LeaderCardDisplay>().UpgradeCasted = false;
             }
             foreach (Transform card in GameObject.Find("MeleeZoneClima").transform)
             {
@@ -400,34 +399,19 @@ public class GameManager : MonoBehaviour
         GameObject RangeP2 = GameObject.Find("RangeZoneP2");
         GameObject SiegeP1 = GameObject.Find("SiegeZoneP1");
         GameObject SiegeP2 = GameObject.Find("SiegeZoneP2");
+        GameObject MeleeUpP1 = GameObject.Find("MeleeZoneUpP1");
+        GameObject MeleeUpP2 = GameObject.Find("MeleeZoneUpP2");
+        GameObject RangeUpP1 = GameObject.Find("RangeZoneUpP1");
+        GameObject RangeUpP2 = GameObject.Find("RangeZoneUpP2");
+        GameObject SiegeUpP1 = GameObject.Find("SiegeZoneUpP1");
+        GameObject SiegeUpP2 = GameObject.Find("SiegeZoneUpP2");
         GameObject MeleeWeather = GameObject.Find("MeleeZoneClima");
         GameObject RangeWeather = GameObject.Find("RangeZoneClima");
         GameObject SiegeWeather = GameObject.Find("SiegeZoneClima");
 
-        foreach (Transform card in MeleeP1.transform)
-        {
-            card.gameObject.SetActive(false);
-        }
-        foreach (Transform card in MeleeP2.transform)
-        {
-            card.gameObject.SetActive(false);
-        }
-        foreach (Transform card in RangeP1.transform)
-        {
-            card.gameObject.SetActive(false);
-        }
-        foreach (Transform card in RangeP2.transform)
-        {
-            card.gameObject.SetActive(false);
-        }
-        foreach (Transform card in SiegeP1.transform)
-        {
-            card.gameObject.SetActive(false);
-        }
-        foreach (Transform card in SiegeP2.transform)
-        {
-            card.gameObject.SetActive(false);
-        }
+        List<Transform> ToCementeryP1 = new();
+        List<Transform> ToCementeryP2 = new();
+
         foreach (Transform card in MeleeWeather.transform)
         {
             card.gameObject.SetActive(false);
@@ -443,31 +427,88 @@ public class GameManager : MonoBehaviour
             card.gameObject.SetActive(false);
             card.SetParent(CementeryP1.transform, false);
         }
+        foreach (Transform card in MeleeUpP1.transform)
+        {
+            card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
+        }
+        foreach (Transform card in RangeUpP1.transform)
+        {
+            card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
+        }
+        foreach (Transform card in SiegeUpP1.transform)
+        {
+            card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
+        }
+        foreach (Transform card in MeleeUpP2.transform)
+        {
+            card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
+        }
+        foreach (Transform card in RangeUpP2.transform)
+        {
+            card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
+        }
+        foreach (Transform card in SiegeUpP2.transform)
+        {
+            card.gameObject.SetActive(false);
+            card.SetParent(CementeryP1.transform, false);
+        }
         foreach (Transform card in MeleeP1.transform)
         {
-            card.SetParent(CementeryP1.transform, false);
+            ToCementeryP1.Add(card);
         }
         foreach (Transform card in MeleeP2.transform)
         {
-            card.SetParent(CementeryP2.transform, false);
+            ToCementeryP2.Add(card);
         }
         foreach (Transform card in RangeP1.transform)
         {
-            card.SetParent(CementeryP1.transform, false);
+            ToCementeryP1.Add(card);
         }
         foreach (Transform card in RangeP2.transform)
         {
-            card.SetParent(CementeryP2.transform, false);
+            ToCementeryP2.Add(card);
         }
         foreach (Transform card in SiegeP1.transform)
         {
-            card.SetParent(CementeryP1.transform, false);
+            ToCementeryP1.Add(card);
         }
         foreach (Transform card in SiegeP2.transform)
         {
-            card.SetParent(CementeryP2.transform, false);
+            ToCementeryP2.Add(card);
         }
-
+        foreach (Transform card in ToCementeryP1)
+        {
+            if (!card.GetComponent<CardDisplay>().BondInField)
+            {
+                card.gameObject.SetActive(false);
+                card.SetParent(CementeryP2.transform, false);
+            }
+            card.GetComponent<CardDisplay>().BondInField = false;
+            card.GetComponent<CardDisplay>().Debuffed = false;
+            card.GetComponent<CardDisplay>().Buffed = false;
+            card.GetComponent<CardDisplay>().AffectedByWeather = false;
+            card.GetComponent<CardDisplay>().Upgraded = false;
+            card.GetComponent<CardDisplay>().Selected = false;
+        }
+        foreach (Transform card in ToCementeryP2)
+        {
+            if (!card.GetComponent<CardDisplay>().BondInField)
+            {
+                card.gameObject.SetActive(false);
+                card.SetParent(CementeryP2.transform, false);
+            }
+            card.GetComponent<CardDisplay>().BondInField = false;
+            card.GetComponent<CardDisplay>().Debuffed = false;
+            card.GetComponent<CardDisplay>().Buffed = false;
+            card.GetComponent<CardDisplay>().AffectedByWeather = false;
+            card.GetComponent<CardDisplay>().Upgraded = false;
+            card.GetComponent<CardDisplay>().Selected = false;
+        }
     }
 
     public void Continue()

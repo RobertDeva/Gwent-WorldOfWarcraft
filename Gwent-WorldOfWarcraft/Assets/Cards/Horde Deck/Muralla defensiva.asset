@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 2
   Position3: 2
   CardRank: 2
-  ID: 8
+  ID: 12
   Description: Una muralla fortifica donde los que la protegen ensartaran a los enemigo
     con sus flechas
   Positions: R S

@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 1
   Position3: 0
   CardRank: 2
-  ID: 7
+  ID: 10
   Description: Un sirviente  leal de El Rey Exanime y fiero guerrero
   Positions: ' M R'
   CardFront: {fileID: 21300000, guid: 18f3e030692d0d2489a396db65c3701b, type: 3}

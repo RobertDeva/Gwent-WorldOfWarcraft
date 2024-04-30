@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 0
   Position3: 0
   CardRank: 1
-  ID: 4
+  ID: 11
   Description: Varian Wrynn era el Rey de Ventormenta y Gran Rey de la Gran Alianza
   Positions: M
   CardFront: {fileID: 21300000, guid: d743a933e7bf23648a2a0205437d28a7, type: 3}

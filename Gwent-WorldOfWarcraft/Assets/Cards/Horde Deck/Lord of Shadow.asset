@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 2
   Position3: 2
   CardRank: 1
-  ID: 4
+  ID: 9
   Description: Poderoso Lich que gobierna un gran territorio en Shadowlands
   Positions: R S
   CardFront: {fileID: 21300000, guid: f43892c32607d5f4397ebb521b876093, type: 3}

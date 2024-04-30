@@ -22,6 +22,7 @@ namespace GwentEngine
         {
             Upgrade,
             Weather,
+            SaveCard,
         }
             
         public enum CardTipe

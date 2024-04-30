@@ -128,9 +128,9 @@ public class MoveTo: MonoBehaviour
                 }
                 transform.SetParent(MeleeUpP1.transform, false);
                 GetComponent<CardDisplay>().InField = true;
-                P1.GetComponent<Player>().Played = true;
                 DeckP1.GetComponent<Draw>().CardsInHand--;
                 transform.GetComponent<CardDisplay>().CastEffect();
+                P1.GetComponent<Player>().Played = true;
             }
         }
         else if(startParent == HandP2.transform && P2.GetComponent<Player>().IsPlaying == true && P2.GetComponent<Player>().Played == false)

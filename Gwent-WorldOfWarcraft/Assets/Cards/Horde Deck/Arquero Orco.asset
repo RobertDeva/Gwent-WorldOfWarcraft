@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 1
   Position3: 0
   CardRank: 2
-  ID: 7
+  ID: 12
   Description: Un guerrero orco especilista con el arco
   Positions: M R
   CardFront: {fileID: 21300000, guid: c889b6a08f6d9bb429258da0f91e8c2c, type: 3}

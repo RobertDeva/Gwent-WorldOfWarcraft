@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 2
   Position3: 0
   CardRank: 2
-  ID: 8
+  ID: 7
   Description: Jinete perteneciente a la orden de caballeros de la Alianza
   Positions: M S
   CardFront: {fileID: 21300000, guid: baf7230fdd74ba244a803e93621888c0, type: 3}

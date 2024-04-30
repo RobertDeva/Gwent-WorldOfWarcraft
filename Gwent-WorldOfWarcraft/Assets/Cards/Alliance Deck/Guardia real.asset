@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 0
   Position3: 0
   CardRank: 2
-  ID: 7
+  ID: 10
   Description: Guardaespalda del rey Anduin Wrynn de Ventormenta
   Positions: M
   CardFront: {fileID: 21300000, guid: a082222523ac1544faa40d5f3830b393, type: 3}

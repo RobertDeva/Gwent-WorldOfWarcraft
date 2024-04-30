@@ -20,7 +20,7 @@ MonoBehaviour:
   Position2: 0
   Position3: 0
   CardRank: 2
-  ID: 8
+  ID: 10
   Description: Un no muerto que rezuma el olor a muerte de la  guerra
   Positions: M
   CardFront: {fileID: 21300000, guid: 800a5d71f5f62a04b9eee69c41469d4b, type: 3}

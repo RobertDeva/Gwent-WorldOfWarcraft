@@ -62,6 +62,11 @@ namespace GwentEngine
             CardUp,
             CardDown,
             DrawCard,
+            SetPromedialAttack,
+            DestroyOPCard,
+            DestroyWeakCard,
+            CleanWeakLine,
+            Partner,
             NoEffect
         }
     }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d841110d5806243b3ee0f60516555c, type: 3}
+  m_Name: Orco domador
+  m_EditorClassIdentifier: 
+  CardName: Domador Orco
+  Attack: 5
+  CardFaction: 0
+  Cardtipe: 4
+  Position1: 0
+  Position2: 1
+  Position3: 2
+  CardRank: 2
+  ID: 10
+  Description: Un fiero orco que es maestro en la captura y domesticacion de bestias
+  Positions: M R S
+  CardFront: {fileID: 21300000, guid: 195f6bdd84811394e83fd84419265197, type: 3}

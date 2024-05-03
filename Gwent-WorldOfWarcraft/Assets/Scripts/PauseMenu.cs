@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void Exit()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("Transition Scene");
     }
     public void Options()
     {

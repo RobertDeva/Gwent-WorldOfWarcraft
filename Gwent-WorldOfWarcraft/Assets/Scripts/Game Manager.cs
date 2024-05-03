@@ -355,6 +355,10 @@ public class GameManager : MonoBehaviour
                 {
                     x.GetChild(x.transform.childCount - 1).gameObject.SetActive(true);
                 }
+                foreach (Transform x in GameObject.Find("HandP2").transform)
+                {
+                    x.GetChild(x.transform.childCount - 1).gameObject.SetActive(false);
+                }
             }
 
         }
@@ -383,6 +387,10 @@ public class GameManager : MonoBehaviour
                 foreach (Transform x in GameObject.Find("HandP2").transform)
                 {
                     x.GetChild(x.transform.childCount - 1).gameObject.SetActive(true);
+                }
+                foreach (Transform x in GameObject.Find("HandP1").transform)
+                {
+                    x.GetChild(x.transform.childCount - 1).gameObject.SetActive(false);
                 }
             }
         }
